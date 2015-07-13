@@ -8,6 +8,12 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.idea.helpers({
+    rendered: function () {
+
+    }
+  });
+
   Template.body.events({
     "submit .new-idea": function (event) {
       // This function is called when the new idea form is submitted
