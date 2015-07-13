@@ -1,6 +1,10 @@
 Ideas = new Mongo.Collection("ideas");
 
 if (Meteor.isClient) {
+  Template.registerHelper("formatDate", function (date) {
+    return moment(date).fromNow();
+  });
+
   Template.body.helpers({
     ideas: function () {
       return Ideas.find({}, {sort: {createdAt: -1}});
@@ -9,10 +13,6 @@ if (Meteor.isClient) {
 
   Template.idea.helpers({
     rendered: function () {
-
-    },
-    formatDate: function (date) {
-      return moment(date).fromNow();
     }
   });
 
@@ -30,13 +30,31 @@ if (Meteor.isClient) {
         author: Meteor.userId(),
         authorName: Meteor.user().username,
         comments: [],
-        createdAt: new Date() // current time
+        createdAt: new Date()
       });
 
-      // Clear form
+      event.target.text.value = "";
+      event.target.description.value = "";
+
+      return false;
+    },
+
+    "submit .new-comment": function (event) {
+
+      var text = event.target.text.value;
+
+      var comment = {
+        text: text,
+        upvoteCount: 1,
+        author: Meteor.userId(),
+        authorName: Meteor.user().username,
+        createdAt: new Date()
+      }
+
+      Ideas.update({ _id: this._id }, { $push: { comments: comment }})
+
       event.target.text.value = "";
 
-      // Prevent default form submit
       return false;
     }
   });
@@ -44,6 +62,14 @@ if (Meteor.isClient) {
   Template.idea.events({
     "click .delete": function () {
       Ideas.remove(this._id);
+    }
+  });
+
+  Template.comment.events({
+    "click .delete": function () {
+      console.log("WHUT!");
+      console.log(this);
+      Ideas.update({_id: this._id}, {$pull : {comments : this}});
     }
   });
 
