@@ -12,7 +12,7 @@ if (Meteor.isClient) {
 
     },
     formatDate: function (date) {
-      return moment(date).format("MM/DD/YYYY");
+      return moment(date).fromNow();
     }
   });
 
