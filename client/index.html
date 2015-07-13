@@ -1,0 +1,28 @@
+<head>
+  <title>Teamvote</title>
+</head>
+
+<body>
+  <div id="main-div" class="container">
+    <header>
+      <h1>Teamvote</h1>
+    </header>
+
+    <form class="new-idea">
+      <input type="text" name="text" placeholder="Type to add new ideas" />
+    </form>
+
+    <ul>
+      {{#each ideas}}
+        {{> idea}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+<template name="idea">
+  <li>
+    <button class="delete">&times;</button>
+    {{text}}
+  </li>
+</template>
