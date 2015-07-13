@@ -1,16 +1,14 @@
 <template name="idea">
   <div id="panel-{{_id}}" class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title idea-heading">
+    <div class="panel-heading clearfix">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default delete"><i class="glyphicon glyphicon-trash"></i></button>
+      </div>
+      <h4 class="panel-title pull-left idea-heading">
         <span class="badge not-upvoted"><span class="glyphicon glyphicon-circle-arrow-up"></span> {{upvoteCount}}</span>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
           {{title}}
         </a>
-        <div class="pull-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default delete"><i class="glyphicon glyphicon-trash"></i></button>
-          </div>
-        </div>
       </h4>
     </div>
     <div id="collapse-{{_id}}" class="panel-collapse collapse">
