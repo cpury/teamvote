@@ -22,6 +22,8 @@ if (Meteor.isClient) {
 
       Ideas.insert({
         text: text,
+        upvoteCount: 1,
+        description: "(No description)",
         createdAt: new Date() // current time
       });
 
