@@ -27,6 +27,9 @@ if (Meteor.isClient) {
         title: title,
         upvoteCount: 1,
         description: description,
+        author: Meteor.userId(),
+        authorName: Meteor.user().username,
+        comments: [],
         createdAt: new Date() // current time
       });
 
@@ -42,5 +45,9 @@ if (Meteor.isClient) {
     "click .delete": function () {
       Ideas.remove(this._id);
     }
+  });
+
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_AND_EMAIL"
   });
 }
