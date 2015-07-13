@@ -6,11 +6,9 @@
   <div id="main-div" class="container">
     {{> header}}
 
-    <form class="new-idea">
-      <input type="text" name="text" placeholder="Type to add new ideas" />
-    </form>
+    {{> newIdea}}
 
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel-group" id="accordion">
       {{#each ideas}}
         {{> idea}}
       {{/each}}

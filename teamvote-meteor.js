@@ -1,7 +1,6 @@
 Ideas = new Mongo.Collection("ideas");
 
 if (Meteor.isClient) {
-  // This code only runs on the client
   Template.body.helpers({
     ideas: function () {
       return Ideas.find({}, {sort: {createdAt: -1}});
@@ -11,6 +10,9 @@ if (Meteor.isClient) {
   Template.idea.helpers({
     rendered: function () {
 
+    },
+    formatDate: function (date) {
+      return moment(date).format("MM/DD/YYYY");
     }
   });
 
@@ -18,12 +20,13 @@ if (Meteor.isClient) {
     "submit .new-idea": function (event) {
       // This function is called when the new idea form is submitted
 
-      var text = event.target.text.value;
+      var title = event.target.title.value;
+      var description = event.target.description.value;
 
       Ideas.insert({
-        text: text,
+        title: title,
         upvoteCount: 1,
-        description: "(No description)",
+        description: description,
         createdAt: new Date() // current time
       });
 

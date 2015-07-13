@@ -11,3 +11,4 @@ accounts-ui
 accounts-password
 twbs:bootstrap
 matb33:bootstrap-collapse-js
+momentjs:moment
