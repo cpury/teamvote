@@ -5,8 +5,11 @@
         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> {{authorName}}</button>
         <button type="button" class="btn btn-default delete"><i class="glyphicon glyphicon-trash"></i></button>
       </div>
+      <button type="button" class="btn btn-{{#if ideaIsUpvoted idea}}success{{else}}default{{/if}} upvote pull-left">
+        <span class="glyphicon glyphicon-circle-arrow-up"></span>
+        {{upvoteCount}}
+      </button>
       <h4 class="panel-title pull-left idea-heading">
-        <span class="badge not-upvoted"><span class="glyphicon glyphicon-circle-arrow-up"></span> {{upvoteCount}}</span>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
           {{title}}
         </a>

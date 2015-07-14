@@ -13,13 +13,14 @@ if (Meteor.isClient) {
 
   Template.idea.helpers({
     rendered: function () {
+    },
+    ideaIsUpvoted: function (idea) {
+      return this.upvotes.indexOf(Meteor.userId()) != -1;
     }
   });
 
   Template.body.events({
     "submit .new-idea": function (event) {
-      // This function is called when the new idea form is submitted
-
       var title = event.target.title.value;
       var description = event.target.description.value;
 
@@ -30,8 +31,11 @@ if (Meteor.isClient) {
         author: Meteor.userId(),
         authorName: Meteor.user().username,
         comments: [],
+        upvotes: [Meteor.userId()],
         createdAt: new Date()
       });
+
+      Meteor.user().profile.update({ _id: this._id }, { $push: { comments: comment }})
 
       event.target.text.value = "";
       event.target.description.value = "";
@@ -40,7 +44,6 @@ if (Meteor.isClient) {
     },
 
     "submit .new-comment": function (event) {
-
       var text = event.target.text.value;
 
       var comment = {
@@ -62,6 +65,17 @@ if (Meteor.isClient) {
   Template.idea.events({
     "click .delete": function () {
       Ideas.remove(this._id);
+    },
+    "click .upvote": function () {
+      if(this.upvotes.indexOf(Meteor.userId()) != -1) {
+        // Remove vote:
+        Ideas.update({_id: this._id}, {$inc: {upvoteCount: -1}});
+        Ideas.update({_id: this._id}, {$pull : {upvotes: Meteor.userId()}});
+      } else {
+        // Add vote:
+        Ideas.update({_id: this._id}, {$inc: {upvoteCount: 1}});
+        Ideas.update({_id: this._id}, {$addToSet : {upvotes: Meteor.userId()}});
+      }
     }
   });
 
