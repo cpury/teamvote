@@ -82,8 +82,7 @@ if (Meteor.isClient) {
   Template.comment.events({
     "click .delete": function () {
       console.log("WHUT!");
-      console.log(this);
-      Ideas.update({_id: this._id}, {$pull : {comments : this}});
+      Ideas.update({_id: Template.parentData()._id}, {$pull : {comments : this}});
     }
   });
 
