@@ -19,6 +19,15 @@ Meteor.methods({
   },
 
   deleteIdea: function(ideaId) {
+    idea = Ideas.findOne({_id: ideaId});
+
+    if(!idea) {
+      throw new Meteor.Error("not-found");
+    }
+    if(Meteor.userId() != idea.author) {
+      throw new Meteor.Error("not-authorized");
+    }
+
     Ideas.remove(ideaId);
   },
 
@@ -55,8 +64,12 @@ Meteor.methods({
     Ideas.update({_id: ideaId}, {$push: {comments: comment}});
   },
 
-  deleteComment: function(ideaId, commentId) {
-    Ideas.update({_id: ideaId}, {$pull : {comments : {_id: commentId}}});
+  deleteComment: function(ideaId, comment) {
+    if(Meteor.userId() != comment.author) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Ideas.update({_id: ideaId}, {$pull: {comments: comment}});
   },
 
   upvoteComment: function(ideaId, comment) {
@@ -140,7 +153,7 @@ if (Meteor.isClient) {
   });
 
   Template.idea.events({
-    "click .delete": function () {
+    "click .delete-idea": function () {
       Meteor.call("deleteIdea", this._id);
     },
     "click .upvote-idea": function () {
@@ -149,8 +162,8 @@ if (Meteor.isClient) {
   });
 
   Template.comment.events({
-    "click .delete": function () {
-      Meteor.call("deleteComment", Template.parentData()._id, this._id);
+    "click .delete-comment": function () {
+      Meteor.call("deleteComment", Template.parentData()._id, this);
     },
     "click .upvote-comment": function () {
       Meteor.call("upvoteComment", Template.parentData()._id, this);
