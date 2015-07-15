@@ -1,5 +1,40 @@
 Ideas = new Mongo.Collection("ideas");
 
+Meteor.methods({
+  addIdea: function(title, description) {
+    if(!Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Ideas.insert({
+      title: title,
+      upvoteCount: 1,
+      upvotes: [Meteor.userId()],
+      description: description,
+      author: Meteor.userId(),
+      authorName: Meteor.user().username,
+      comments: [],
+      createdAt: new Date()
+    });
+  },
+  deleteIdea: function(ideaId) {
+    Ideas.remove(ideaId);
+  },
+  upvoteIdea: function(ideaId) {
+    idea = Ideas.findOne({_id: ideaId});
+
+    if(idea.upvotes.indexOf(Meteor.userId()) != -1) {
+      // Remove vote:
+      Ideas.update({_id: ideaId}, {$inc: {upvoteCount: -1}});
+      Ideas.update({_id: ideaId}, {$pull : {upvotes: Meteor.userId()}});
+    } else {
+      // Add vote:
+      Ideas.update({_id: ideaId}, {$inc: {upvoteCount: 1}});
+      Ideas.update({_id: ideaId}, {$addToSet : {upvotes: Meteor.userId()}});
+    }
+  }
+});
+
 if (Meteor.isClient) {
   Template.registerHelper("formatDate", function (date) {
     return moment(date).fromNow();
@@ -36,20 +71,9 @@ if (Meteor.isClient) {
       var title = event.target.title.value;
       var description = event.target.description.value;
 
-      Ideas.insert({
-        title: title,
-        upvoteCount: 1,
-        upvotes: [Meteor.userId()],
-        description: description,
-        author: Meteor.userId(),
-        authorName: Meteor.user().username,
-        comments: [],
-        createdAt: new Date()
-      });
+      Meteor.call("addIdea", title, description);
 
-      Meteor.user().profile.update({ _id: this._id }, { $push: { comments: comment }})
-
-      event.target.text.value = "";
+      event.target.title.value = "";
       event.target.description.value = "";
 
       return false;
@@ -78,18 +102,10 @@ if (Meteor.isClient) {
 
   Template.idea.events({
     "click .delete": function () {
-      Ideas.remove(this._id);
+      Meteor.call("deleteIdea", this._id);
     },
     "click .upvote": function () {
-      if(this.upvotes.indexOf(Meteor.userId()) != -1) {
-        // Remove vote:
-        Ideas.update({_id: this._id}, {$inc: {upvoteCount: -1}});
-        Ideas.update({_id: this._id}, {$pull : {upvotes: Meteor.userId()}});
-      } else {
-        // Add vote:
-        Ideas.update({_id: this._id}, {$inc: {upvoteCount: 1}});
-        Ideas.update({_id: this._id}, {$addToSet : {upvotes: Meteor.userId()}});
-      }
+      Meteor.call("upvoteIdea", this._id);
     }
   });
 
@@ -106,7 +122,7 @@ if (Meteor.isClient) {
         );
         Ideas.update(
           {_id: Template.parentData()._id, 'comments._id': this._id},
-          {$pull : {'comments.upvotes': Meteor.userId()}}
+          {$pull : {'comments.$': {'upvotes': Meteor.userId()}}}
         );
       } else {
         // Add vote:
@@ -116,7 +132,7 @@ if (Meteor.isClient) {
         );
         Ideas.update(
           {_id: Template.parentData()._id, 'comments._id': this._id},
-          {$addToSet : {'comments.upvotes': Meteor.userId()}}
+          {$addToSet : {'comments.$': {'upvotes': Meteor.userId()}}}
         );
       }
     }
