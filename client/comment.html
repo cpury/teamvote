@@ -9,9 +9,11 @@
         <i class="glyphicon glyphicon-time"></i>
         {{formatDate createdAt}}
       </button>
+      {{#if canDeleteComment this}}
       <button type="button" class="btn btn-default delete">
         <i class="glyphicon glyphicon-trash"></i>
       </button>
+      {{/if}}
     </div>
     <div class="pull-left">
       <i class="glyphicon glyphicon-comment"></i>

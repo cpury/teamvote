@@ -16,6 +16,15 @@ if (Meteor.isClient) {
     },
     ideaIsUpvoted: function (idea) {
       return this.upvotes.indexOf(Meteor.userId()) != -1;
+    },
+    canDeleteIdea: function (idea) {
+      return Meteor.userId() == idea.author;
+    }
+  });
+
+  Template.comment.helpers({
+    canDeleteComment: function (comment) {
+      return Meteor.userId() == comment.author;
     }
   });
 
@@ -81,7 +90,6 @@ if (Meteor.isClient) {
 
   Template.comment.events({
     "click .delete": function () {
-      console.log("WHUT!");
       Ideas.update({_id: Template.parentData()._id}, {$pull : {comments : this}});
     }
   });
