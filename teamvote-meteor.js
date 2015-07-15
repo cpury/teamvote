@@ -17,9 +17,11 @@ Meteor.methods({
       createdAt: new Date()
     });
   },
+
   deleteIdea: function(ideaId) {
     Ideas.remove(ideaId);
   },
+
   upvoteIdea: function(ideaId) {
     idea = Ideas.findOne({_id: ideaId});
 
@@ -31,6 +33,53 @@ Meteor.methods({
       // Add vote:
       Ideas.update({_id: ideaId}, {$inc: {upvoteCount: 1}});
       Ideas.update({_id: ideaId}, {$addToSet : {upvotes: Meteor.userId()}});
+    }
+  },
+
+
+  addComment: function(ideaId, text) {
+    if(!Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    var comment = {
+      _id: new Meteor.Collection.ObjectID()._str,
+      text: text,
+      upvoteCount: 1,
+      upvotes: [Meteor.userId()],
+      author: Meteor.userId(),
+      authorName: Meteor.user().username,
+      createdAt: new Date()
+    };
+
+    Ideas.update({_id: ideaId}, {$push: {comments: comment}});
+  },
+
+  deleteComment: function(ideaId, commentId) {
+    Ideas.update({_id: ideaId}, {$pull : {comments : {_id: commentId}}});
+  },
+
+  upvoteComment: function(ideaId, comment) {
+    if(comment.upvotes.indexOf(Meteor.userId()) != -1) {
+      // Remove vote:
+      Ideas.update(
+        {_id: ideaId, 'comments._id': comment._id},
+        {$inc: {'comments.$.upvoteCount': -1}}
+      );
+      Ideas.update(
+        {_id: ideaId, 'comments._id': comment._id},
+        {$pull : {'comments.$.upvotes': Meteor.userId()}}
+      );
+    } else {
+      // Add vote:
+      Ideas.update(
+        {_id: ideaId, 'comments._id': comment._id},
+        {$inc: {'comments.$.upvoteCount': 1}}
+      );
+      Ideas.update(
+        {_id: ideaId, 'comments._id': comment._id},
+        {$addToSet : {'comments.$.upvotes': Meteor.userId()}}
+      );
     }
   }
 });
@@ -82,17 +131,7 @@ if (Meteor.isClient) {
     "submit .new-comment": function (event) {
       var text = event.target.text.value;
 
-      var comment = {
-        _id: new Meteor.Collection.ObjectID()._str,
-        text: text,
-        upvoteCount: 1,
-        upvotes: [Meteor.userId()],
-        author: Meteor.userId(),
-        authorName: Meteor.user().username,
-        createdAt: new Date()
-      }
-
-      Ideas.update({ _id: this._id }, { $push: { comments: comment }})
+      Meteor.call("addComment", this._id, text);
 
       event.target.text.value = "";
 
@@ -104,37 +143,17 @@ if (Meteor.isClient) {
     "click .delete": function () {
       Meteor.call("deleteIdea", this._id);
     },
-    "click .upvote": function () {
+    "click .upvote-idea": function () {
       Meteor.call("upvoteIdea", this._id);
     }
   });
 
   Template.comment.events({
     "click .delete": function () {
-      Ideas.update({_id: Template.parentData()._id}, {$pull : {comments : this}});
+      Meteor.call("deleteComment", Template.parentData()._id, this._id);
     },
-    "click .upvote": function () {
-      if(this.upvotes.indexOf(Meteor.userId()) != -1) {
-        // Remove vote:
-        Ideas.update(
-          {_id: Template.parentData()._id, 'comments._id': this._id},
-          {$inc: {'comments.upvoteCount': -1}}
-        );
-        Ideas.update(
-          {_id: Template.parentData()._id, 'comments._id': this._id},
-          {$pull : {'comments.$': {'upvotes': Meteor.userId()}}}
-        );
-      } else {
-        // Add vote:
-        Ideas.update(
-          {_id: Template.parentData()._id, 'comments._id': this._id},
-          {$inc: {'comments.upvoteCount': 1}}
-        );
-        Ideas.update(
-          {_id: Template.parentData()._id, 'comments._id': this._id},
-          {$addToSet : {'comments.$': {'upvotes': Meteor.userId()}}}
-        );
-      }
+    "click .upvote-comment": function () {
+      Meteor.call("upvoteComment", Template.parentData()._id, this);
     }
   });
 
