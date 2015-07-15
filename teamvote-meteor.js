@@ -32,6 +32,10 @@ Meteor.methods({
   },
 
   upvoteIdea: function(ideaId) {
+    if(!Meteor.userId()) {
+      return;
+    }
+
     idea = Ideas.findOne({_id: ideaId});
 
     if(idea.upvotes.indexOf(Meteor.userId()) != -1) {
@@ -73,6 +77,10 @@ Meteor.methods({
   },
 
   upvoteComment: function(ideaId, comment) {
+    if(!Meteor.userId()) {
+      return;
+    }
+
     if(comment.upvotes.indexOf(Meteor.userId()) != -1) {
       // Remove vote:
       Ideas.update(
