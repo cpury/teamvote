@@ -15,7 +15,7 @@ if (Meteor.isClient) {
     rendered: function () {
     },
     ideaIsUpvoted: function (idea) {
-      return this.upvotes.indexOf(Meteor.userId()) != -1;
+      return idea.upvotes.indexOf(Meteor.userId()) != -1;
     },
     canDeleteIdea: function (idea) {
       return Meteor.userId() == idea.author;
@@ -23,6 +23,9 @@ if (Meteor.isClient) {
   });
 
   Template.comment.helpers({
+    commentIsUpvoted: function (comment) {
+      return comment.upvotes.indexOf(Meteor.userId()) != -1;
+    },
     canDeleteComment: function (comment) {
       return Meteor.userId() == comment.author;
     }
@@ -36,11 +39,11 @@ if (Meteor.isClient) {
       Ideas.insert({
         title: title,
         upvoteCount: 1,
+        upvotes: [Meteor.userId()],
         description: description,
         author: Meteor.userId(),
         authorName: Meteor.user().username,
         comments: [],
-        upvotes: [Meteor.userId()],
         createdAt: new Date()
       });
 
@@ -56,8 +59,10 @@ if (Meteor.isClient) {
       var text = event.target.text.value;
 
       var comment = {
+        _id: new Meteor.Collection.ObjectID()._str,
         text: text,
         upvoteCount: 1,
+        upvotes: [Meteor.userId()],
         author: Meteor.userId(),
         authorName: Meteor.user().username,
         createdAt: new Date()
@@ -91,6 +96,29 @@ if (Meteor.isClient) {
   Template.comment.events({
     "click .delete": function () {
       Ideas.update({_id: Template.parentData()._id}, {$pull : {comments : this}});
+    },
+    "click .upvote": function () {
+      if(this.upvotes.indexOf(Meteor.userId()) != -1) {
+        // Remove vote:
+        Ideas.update(
+          {_id: Template.parentData()._id, 'comments._id': this._id},
+          {$inc: {'comments.upvoteCount': -1}}
+        );
+        Ideas.update(
+          {_id: Template.parentData()._id, 'comments._id': this._id},
+          {$pull : {'comments.upvotes': Meteor.userId()}}
+        );
+      } else {
+        // Add vote:
+        Ideas.update(
+          {_id: Template.parentData()._id, 'comments._id': this._id},
+          {$inc: {'comments.upvoteCount': 1}}
+        );
+        Ideas.update(
+          {_id: Template.parentData()._id, 'comments._id': this._id},
+          {$addToSet : {'comments.upvotes': Meteor.userId()}}
+        );
+      }
     }
   });
 

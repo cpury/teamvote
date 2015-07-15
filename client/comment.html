@@ -16,6 +16,10 @@
       {{/if}}
     </div>
     <div class="pull-left">
+      <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} upvote pull-left">
+        <span class="glyphicon glyphicon-circle-arrow-up"></span>
+        {{upvoteCount}}
+      </button>
       <i class="glyphicon glyphicon-comment"></i>
       {{text}}
     </div>
