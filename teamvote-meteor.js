@@ -19,7 +19,7 @@ Meteor.methods({
   },
 
   deleteIdea: function(ideaId) {
-    idea = Ideas.findOne({_id: ideaId});
+    idea = Ideas.findOne(ideaId);
 
     if(!idea) {
       throw new Meteor.Error("not-found");
@@ -36,16 +36,16 @@ Meteor.methods({
       return;
     }
 
-    idea = Ideas.findOne({_id: ideaId});
+    idea = Ideas.findOne(ideaId);
 
     if(idea.upvotes.indexOf(Meteor.userId()) != -1) {
       // Remove vote:
-      Ideas.update({_id: ideaId}, {$inc: {upvoteCount: -1}});
-      Ideas.update({_id: ideaId}, {$pull : {upvotes: Meteor.userId()}});
+      Ideas.update(ideaId, {$inc: {upvoteCount: -1}});
+      Ideas.update(ideaId, {$pull : {upvotes: Meteor.userId()}});
     } else {
       // Add vote:
-      Ideas.update({_id: ideaId}, {$inc: {upvoteCount: 1}});
-      Ideas.update({_id: ideaId}, {$addToSet : {upvotes: Meteor.userId()}});
+      Ideas.update(ideaId, {$inc: {upvoteCount: 1}});
+      Ideas.update(ideaId, {$addToSet : {upvotes: Meteor.userId()}});
     }
   },
 
@@ -65,7 +65,7 @@ Meteor.methods({
       createdAt: new Date()
     };
 
-    Ideas.update({_id: ideaId}, {$push: {comments: comment}});
+    Ideas.update(ideaId, {$push: {comments: comment}});
   },
 
   deleteComment: function(ideaId, comment) {
@@ -73,7 +73,7 @@ Meteor.methods({
       throw new Meteor.Error("not-authorized");
     }
 
-    Ideas.update({_id: ideaId}, {$pull: {comments: comment}});
+    Ideas.update(ideaId, {$pull: {comments: comment}});
   },
 
   upvoteComment: function(ideaId, comment) {
