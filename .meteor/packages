@@ -5,8 +5,8 @@
 # but you can also edit it by hand.
 
 meteor-platform
-accounts-ui
 accounts-password
 twbs:bootstrap
 matb33:bootstrap-collapse-js
 momentjs:moment
+ian:accounts-ui-bootstrap-3
