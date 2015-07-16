@@ -40,12 +40,22 @@ Meteor.methods({
 
     if(idea.upvotes.indexOf(Meteor.userId()) != -1) {
       // Remove vote:
-      Ideas.update(ideaId, {$inc: {upvoteCount: -1}});
-      Ideas.update(ideaId, {$pull : {upvotes: Meteor.userId()}});
+      Ideas.update(
+        ideaId,
+        {
+          $inc: {upvoteCount: -1},
+          $pull : {upvotes: Meteor.userId()}
+        }
+      );
     } else {
       // Add vote:
-      Ideas.update(ideaId, {$inc: {upvoteCount: 1}});
-      Ideas.update(ideaId, {$addToSet : {upvotes: Meteor.userId()}});
+      Ideas.update(
+        ideaId,
+        {
+          $inc: {upvoteCount: 1},
+          $addToSet : {upvotes: Meteor.userId()}
+        }
+      );
     }
   },
 
@@ -85,21 +95,19 @@ Meteor.methods({
       // Remove vote:
       Ideas.update(
         {_id: ideaId, 'comments._id': comment._id},
-        {$inc: {'comments.$.upvoteCount': -1}}
-      );
-      Ideas.update(
-        {_id: ideaId, 'comments._id': comment._id},
-        {$pull : {'comments.$.upvotes': Meteor.userId()}}
+        {
+          $inc: {'comments.$.upvoteCount': -1},
+          $pull : {'comments.$.upvotes': Meteor.userId()}
+        }
       );
     } else {
       // Add vote:
       Ideas.update(
         {_id: ideaId, 'comments._id': comment._id},
-        {$inc: {'comments.$.upvoteCount': 1}}
-      );
-      Ideas.update(
-        {_id: ideaId, 'comments._id': comment._id},
-        {$addToSet : {'comments.$.upvotes': Meteor.userId()}}
+        {
+          $inc: {'comments.$.upvoteCount': 1},
+          $addToSet : {'comments.$.upvotes': Meteor.userId()}
+        }
       );
     }
   }
