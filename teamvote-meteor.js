@@ -5,6 +5,8 @@ Meteor.methods({
     if(!Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
+    check(title, String);
+    check(description, String);
 
     Ideas.insert({
       title: title,
@@ -19,6 +21,8 @@ Meteor.methods({
   },
 
   deleteIdea: function(ideaId) {
+    check(ideaId, String);
+
     idea = Ideas.findOne(ideaId);
 
     if(!idea) {
@@ -35,6 +39,7 @@ Meteor.methods({
     if(!Meteor.userId()) {
       return;
     }
+    check(ideaId, String);
 
     idea = Ideas.findOne(ideaId);
 
@@ -64,6 +69,8 @@ Meteor.methods({
     if(!Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
+    check(ideaId, String);
+    check(text, String);
 
     var comment = {
       _id: new Meteor.Collection.ObjectID()._str,
@@ -82,6 +89,8 @@ Meteor.methods({
     if(Meteor.userId() != comment.author) {
       throw new Meteor.Error("not-authorized");
     }
+    check(ideaId, String);
+    // TODO check comment... need to replace with commentId
 
     Ideas.update(ideaId, {$pull: {comments: comment}});
   },
@@ -90,6 +99,8 @@ Meteor.methods({
     if(!Meteor.userId()) {
       return;
     }
+    check(ideaId, String);
+    // TODO check comment... need to replace with commentId
 
     if(comment.upvotes.indexOf(Meteor.userId()) != -1) {
       // Remove vote:
