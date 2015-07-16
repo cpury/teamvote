@@ -1,41 +1,42 @@
 <template name="comment">
   <li class="list-group-item">
     <div class="btn-group pull-right">
-      <button type="button" class="btn btn-default">
+      <button type="button" class="btn btn-default btn-sm">
         <i class="glyphicon glyphicon-user"></i>
         {{authorName}}
       </button>
-      <button type="button" class="btn btn-default">
+      <button type="button" class="btn btn-default btn-sm">
         <i class="glyphicon glyphicon-time"></i>
         {{formatDate createdAt}}
       </button>
       {{#if canDeleteComment this}}
-      <button type="button" class="btn btn-default delete-comment">
+      <button type="button" class="btn btn-default btn-sm delete-comment">
         <i class="glyphicon glyphicon-trash"></i>
       </button>
       {{/if}}
     </div>
-    <div class="pull-left">
-      <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} upvote-comment pull-left">
-        <span class="glyphicon glyphicon-circle-arrow-up"></span>
-        {{upvoteCount}}
-      </button>
-      <i class="glyphicon glyphicon-comment"></i>
+
+    <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} btn-sm upvote-comment pull-left">
+      <span class="glyphicon glyphicon-circle-arrow-up"></span>
+      {{upvoteCount}}
+    </button>
+
+    <h5 class="panel-title pull-left comment-body">
       {{text}}
-    </div>
+    </h5>
   </li>
 </template>
 
 <template name="newComment">
+  {{#if currentUser}}
   <li class="list-group-item">
-    <form style="margin-bottom:30px;" class="new-comment">
-      <div class="form-group">
-        <div class="input-group input-group">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
-          <input type="text" class="form-control large-input" placeholder="Add a new comment" name="text">
-        </div>
+    <form class="new-comment">
+      <div class="input-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+        <input type="text" class="form-control large-input" placeholder="Add a new comment" name="text">
       </div>
       <button type="submit" class="btn btn-default hidden">Submit</button>
     </form>
   </li>
+  {{/if}}
 </template>

@@ -28,6 +28,12 @@ body {
   padding-left: 20px;
 }
 
+.comment-body {
+  font-size: 18px;
+  padding-top: 6px;
+  padding-left: 15px;
+}
+
 .input-group-addon {
   min-width:55px;
   text-align:center;
