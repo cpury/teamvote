@@ -1,3 +1,6 @@
+Session.set("order_by", "Newest");
+var orderByDependency = new Tracker.Dependency;
+
 Meteor.subscribe("ideas");
 
 Template.registerHelper("formatDate", function (date) {
@@ -6,7 +9,23 @@ Template.registerHelper("formatDate", function (date) {
 
 Template.body.helpers({
   ideas: function () {
-    return Ideas.find({}, {sort: {createdAt: -1}});
+    orderByDependency.depend();
+    order_by = Session.get("order_by");
+
+    if (order_by == "Newest") {
+      return Ideas.find({}, {sort: {createdAt: -1}});
+    }
+    if (order_by == "Oldest") {
+      return Ideas.find({}, {sort: {createdAt: +1}});
+    }
+    if (order_by == "Upvotes") {
+      return Ideas.find({}, {sort: {numUpvotes: -1}});
+    }
+    if (order_by == "Comments") {
+      return Ideas.find({}, {sort: {numComments: -1}});
+    }
+
+    return Ideas.find({});
   }
 });
 
@@ -40,6 +59,8 @@ Template.body.events({
     event.target.title.value = "";
     event.target.description.value = "";
 
+    orderByDependency.changed();
+
     return false;
   },
 
@@ -50,7 +71,16 @@ Template.body.events({
 
     event.target.text.value = "";
 
+    orderByDependency.changed();
+
     return false;
+  },
+
+  "change #order-by-form": function (event) {
+    var order_by = event.target.value;
+
+    Session.set("order_by", order_by);
+    orderByDependency.changed();
   }
 });
 
@@ -60,15 +90,18 @@ Template.idea.events({
   },
   "click .upvote-idea": function () {
     Meteor.call("upvoteIdea", this._id);
+    orderByDependency.changed();
   }
 });
 
 Template.comment.events({
   "click .delete-comment": function () {
     Meteor.call("deleteComment", Template.parentData()._id, this);
+    orderByDependency.changed();
   },
   "click .upvote-comment": function () {
     Meteor.call("upvoteComment", Template.parentData()._id, this);
+    orderByDependency.changed();
   }
 });
 

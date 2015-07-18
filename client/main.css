@@ -78,3 +78,7 @@ ul li {
 .panel-group .panel {
   overflow: visible;
 }
+
+.idea-list {
+  margin-top: 30px;
+}

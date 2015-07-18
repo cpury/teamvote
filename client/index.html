@@ -10,7 +10,9 @@
 
     {{> newIdea}}
 
-    <div class="panel-group" id="accordion">
+    {{> orderBy }}
+
+    <div class="panel-group idea-list" id="accordion">
       {{#each ideas}}
         {{> idea}}
       {{/each}}

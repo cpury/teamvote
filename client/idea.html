@@ -46,7 +46,7 @@
 
 <template name="newIdea">
   {{#if currentUser}}
-  <form style="margin-bottom:30px;" class="new-idea">
+  <form class="new-idea">
     <div class="form-group">
       <div class="input-group input-group-lg">
         <span class="input-group-addon large-input">💡</span>
@@ -62,4 +62,18 @@
     <button type="submit" class="btn btn-default hidden">Submit</button>
   </form>
   {{/if}}
+</template>
+
+<template name="orderBy">
+  <form class="form-inline" id="order-by-form">
+    <div class="form-group">
+      <label for="orderby">Order by</label>
+      <select class="form-control" id="orderby">
+        <option>Newest</option>
+        <option>Oldest</option>
+        <option>Upvotes</option>
+        <option>Comments</option>
+      </select>
+    </div>
+  </form>
 </template>

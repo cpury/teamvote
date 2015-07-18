@@ -15,6 +15,7 @@ Meteor.methods({
       description: description,
       author: Meteor.userId(),
       authorName: Meteor.user().username,
+      commentCount: 0,
       comments: [],
       createdAt: new Date()
     });
@@ -82,7 +83,13 @@ Meteor.methods({
       createdAt: new Date()
     };
 
-    Ideas.update(ideaId, {$push: {comments: comment}});
+    Ideas.update(
+      ideaId,
+      {
+        $inc: {commentCount: 1},
+        $push: {comments: comment}
+      }
+    );
   },
 
   deleteComment: function(ideaId, comment) {
@@ -92,7 +99,13 @@ Meteor.methods({
     check(ideaId, String);
     // TODO check comment... need to replace with commentId
 
-    Ideas.update(ideaId, {$pull: {comments: comment}});
+    Ideas.update(
+      ideaId,
+      {
+        $inc: {commentCount: -1},
+        $pull: {comments: comment}
+      }
+    );
   },
 
   upvoteComment: function(ideaId, comment) {
