@@ -92,7 +92,7 @@ Template.idea.events({
 
 Template.comment.events({
   "click .delete-comment": function () {
-    Meteor.call("deleteComment", Template.parentData()._id, this);
+    Meteor.call("deleteComment", Template.parentData()._id, this._id);
     orderByDependency.changed();
   },
   "click .upvote-comment": function () {

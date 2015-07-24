@@ -24,16 +24,10 @@ Meteor.methods({
   deleteIdea: function(ideaId) {
     check(ideaId, String);
 
-    idea = Ideas.findOne(ideaId);
-
-    if(!idea) {
-      throw new Meteor.Error("not-found");
-    }
-    if(Meteor.userId() != idea.author) {
-      throw new Meteor.Error("not-authorized");
-    }
-
-    Ideas.remove(ideaId);
+    Ideas.remove({
+      "_id": ideaId,
+      "author": Meteor.userId()
+    });
   },
 
   upvoteIdea: function(ideaId) {
@@ -92,18 +86,19 @@ Meteor.methods({
     );
   },
 
-  deleteComment: function(ideaId, comment) {
-    if(Meteor.userId() != comment.author) {
-      throw new Meteor.Error("not-authorized");
-    }
+  deleteComment: function(ideaId, commentId) {
     check(ideaId, String);
-    // TODO check comment... need to replace with commentId
+    check(commentId, String);
 
     Ideas.update(
-      ideaId,
+      {
+        "_id": ideaId,
+        "comments._id": commentId,
+        "comments.author": Meteor.userId()
+      },
       {
         $inc: {commentCount: -1},
-        $pull: {comments: comment}
+        $pull: {comments: {"_id": commentId}}
       }
     );
   },
@@ -118,7 +113,10 @@ Meteor.methods({
     if(comment.upvotes.indexOf(Meteor.userId()) != -1) {
       // Remove vote:
       Ideas.update(
-        {_id: ideaId, 'comments._id': comment._id},
+        {
+          _id: ideaId,
+          'comments._id': comment._id
+        },
         {
           $inc: {'comments.$.upvoteCount': -1},
           $pull : {'comments.$.upvotes': Meteor.userId()}
@@ -127,7 +125,10 @@ Meteor.methods({
     } else {
       // Add vote:
       Ideas.update(
-        {_id: ideaId, 'comments._id': comment._id},
+        {
+          _id: ideaId,
+          'comments._id': comment._id
+        },
         {
           $inc: {'comments.$.upvoteCount': 1},
           $addToSet : {'comments.$.upvotes': Meteor.userId()}
