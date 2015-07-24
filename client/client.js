@@ -3,10 +3,6 @@ var orderByDependency = new Tracker.Dependency;
 
 Meteor.subscribe("ideas");
 
-Template.registerHelper("formatDate", function (date) {
-  return moment(date).fromNow();
-});
-
 Template.body.helpers({
   ideas: function () {
     orderByDependency.depend();

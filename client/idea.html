@@ -5,7 +5,7 @@
         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> {{authorName}}</button>
         <button type="button" class="btn btn-default">
           <i class="glyphicon glyphicon-time"></i>
-          {{formatDate createdAt}}
+          {{livestamp createdAt}}
         </button>
         {{#if canDeleteIdea this}}
         <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
