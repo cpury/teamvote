@@ -19,10 +19,10 @@ Template.body.helpers({
       return Ideas.find({}, {sort: {createdAt: +1}});
     }
     if (order_by == "Upvotes") {
-      return Ideas.find({}, {sort: {numUpvotes: -1}});
+      return Ideas.find({}, {sort: {upvoteCount: -1, createdAt: -1}});
     }
     if (order_by == "Comments") {
-      return Ideas.find({}, {sort: {numComments: -1}});
+      return Ideas.find({}, {sort: {commentCount: -1, createdAt: -1}});
     }
 
     return Ideas.find({});
