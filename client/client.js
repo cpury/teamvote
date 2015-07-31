@@ -96,7 +96,7 @@ Template.comment.events({
     orderByDependency.changed();
   },
   "click .upvote-comment": function () {
-    Meteor.call("upvoteComment", Template.parentData()._id, this);
+    Meteor.call("upvoteComment", Template.parentData()._id, this._id);
     orderByDependency.changed();
   }
 });

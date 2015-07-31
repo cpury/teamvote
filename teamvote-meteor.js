@@ -103,19 +103,32 @@ Meteor.methods({
     );
   },
 
-  upvoteComment: function(ideaId, comment) {
+  upvoteComment: function(ideaId, commentId) {
     if(!Meteor.userId()) {
       return;
     }
     check(ideaId, String);
-    // TODO check comment... need to replace with commentId
+    check(commentId, String);
 
-    if(comment.upvotes.indexOf(Meteor.userId()) != -1) {
+    // Is upvote or not?
+    idea = Ideas.findOne(
+      {
+        "_id": ideaId,
+        "comments": {
+          $elemMatch: {
+            "_id": commentId,
+            "upvotes": Meteor.userId()
+          }
+        }
+      }
+    );
+
+    if(idea) {
       // Remove vote:
       Ideas.update(
         {
           _id: ideaId,
-          'comments._id': comment._id
+          'comments._id': commentId
         },
         {
           $inc: {'comments.$.upvoteCount': -1},
@@ -127,7 +140,7 @@ Meteor.methods({
       Ideas.update(
         {
           _id: ideaId,
-          'comments._id': comment._id
+          'comments._id': commentId
         },
         {
           $inc: {'comments.$.upvoteCount': 1},
