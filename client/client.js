@@ -1,9 +1,16 @@
 Session.set("order_by", "Newest");
 var orderByDependency = new Tracker.Dependency;
 
-Meteor.subscribe("ideas");
+Template.listIdeas.onCreated(function () {
+  var self = this;
+  self.autorun(function () {
+    var projectId = FlowRouter.getParam("projectId");
+    // TODO: Use projectId later on.
+    self.subscribe("ideas");
+  });
+});
 
-Template.body.helpers({
+Template.listIdeas.helpers({
   ideas: function () {
     orderByDependency.depend();
     order_by = Session.get("order_by");
@@ -45,7 +52,7 @@ Template.comment.helpers({
   }
 });
 
-Template.body.events({
+Template.listIdeas.events({
   "submit .new-idea": function (event) {
     var title = event.target.title.value;
     var description = event.target.description.value;

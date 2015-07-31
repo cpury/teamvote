@@ -13,3 +13,6 @@ ian:accounts-ui-bootstrap-3
 copleykj:livestamp
 255kb:meteor-status
 msavin:mongol
+markdown
+kadira:flow-router
+kadira:blaze-layout

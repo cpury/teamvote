@@ -1,3 +1,22 @@
+<template name="listIdeas">
+    {{> newIdea}}
+
+    {{> orderBy }}
+
+    <div class="panel-group idea-list" id="accordion">
+      {{#if Template.subscriptionsReady}}
+        <p>Loaded!</p>
+        {{#with ideas}}
+          {{#each ideas}}
+            {{> idea}}
+          {{/each}}
+        {{/with}}
+      {{else}}
+        <p>Loading...</p>
+      {{/if}}
+    </div>
+</template>
+
 <template name="idea">
   <div id="panel-{{_id}}" class="panel panel-default">
     <div class="panel-heading clearfix">
