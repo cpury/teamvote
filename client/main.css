@@ -39,6 +39,10 @@ body {
   text-align:center;
 }
 
+.new-comment .input-group-addon {
+  min-width:40px;
+}
+
 .comments {
   padding-top: 15px;
 }
