@@ -86,3 +86,8 @@ body {
 .idea-list {
   margin-top: 30px;
 }
+
+.static-text {
+  font-size: 140%;
+  width: 70%;
+}
