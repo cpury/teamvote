@@ -101,6 +101,18 @@ Template.comment.events({
   }
 });
 
+Template.newIdea.onRendered(function() {
+  $('input[maxlength]').maxlength({
+    alwaysShow: true
+  });
+});
+
+Template.newComment.onRendered(function() {
+  $('input[maxlength]').maxlength({
+    alwaysShow: true
+  });
+});
+
 Accounts.ui.config({
   passwordSignupFields: "USERNAME_AND_EMAIL",
   forceEmailLowercase: true
