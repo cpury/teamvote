@@ -1,24 +1,36 @@
 <template name="listIdeas">
-    {{> newIdea}}
+  {{> newIdea}}
 
-    {{> orderBy }}
+  {{#if Template.subscriptionsReady}}
+    {{#if ideas.count}}
+      {{> orderBy}}
 
-    <div class="panel-group idea-list" id="accordion">
-      {{#if Template.subscriptionsReady}}
-        {{#if ideas}}
-          <p>Something here?</p>
-          {{#with ideas}}
-            {{#each ideas}}
-              {{> idea}}
-            {{/each}}
-          {{/with}}
-        {{else}}
-          <p>Nothing here...</p>
-        {{/if}}
-      {{else}}
-        <p>Loading...</p>
-      {{/if}}
-    </div>
+      <div class="panel-group idea-list" id="accordion">
+        {{#with ideas}}
+          {{#each ideas}}
+            {{> idea}}
+          {{/each}}
+        {{/with}}
+      </div>
+    {{else}}
+      {{> noIdeas}}
+    {{/if}}
+  {{else}}
+    <p>Loading...</p>
+  {{/if}}
+</template>
+
+<template name="noIdeas">
+  <div class="text-center">
+    <br />
+    <br />
+    <h1>No ideas yet!</h1>
+    {{#if currentUser}}
+      <h4>Share your ideas to start brainstorming!</h4>
+    {{else}}
+      <h4>Log in to start brainstorming!</h4>
+    {{/if}}
+  </div>
 </template>
 
 <template name="idea">
