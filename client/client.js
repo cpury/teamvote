@@ -1,4 +1,4 @@
-Session.set("order_by", "Newest");
+Session.setDefault("order_by", "Newest");
 var orderByDependency = new Tracker.Dependency;
 
 Template.listIdeas.onCreated(function () {
@@ -52,6 +52,12 @@ Template.comment.helpers({
   }
 });
 
+Template.orderBy.helpers({
+  isSelected: function (value) {
+    return Session.equals('order_by', value) ? 'selected' : '';
+  }
+})
+
 Template.listIdeas.events({
   "submit .new-idea": function (event) {
     var title = event.target.title.value;
@@ -77,13 +83,6 @@ Template.listIdeas.events({
     orderByDependency.changed();
 
     return false;
-  },
-
-  "change #order-by-form": function (event) {
-    var order_by = event.target.value;
-
-    Session.set("order_by", order_by);
-    orderByDependency.changed();
   }
 });
 
@@ -108,6 +107,15 @@ Template.comment.events({
   }
 });
 
+Template.orderBy.events({
+  "change #order-by-form": function (event) {
+    var order_by = event.target.value;
+
+    Session.set("order_by", order_by);
+    orderByDependency.changed();
+  }
+});
+
 Template.newIdea.onRendered(function() {
   $('input[maxlength]').maxlength({
     alwaysShow: true
@@ -118,6 +126,14 @@ Template.newComment.onRendered(function() {
   $('input[maxlength]').maxlength({
     alwaysShow: true
   });
+});
+
+Template.orderBy.onRendered(function() {
+  var order_by = Session.get("order_by");
+  console.log("order by:", order_by);
+  if (!order_by) {
+    order_by = "Newest";
+  }
 });
 
 Accounts.ui.config({
