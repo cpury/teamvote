@@ -5,11 +5,16 @@
 
     <div class="panel-group idea-list" id="accordion">
       {{#if Template.subscriptionsReady}}
-        {{#with ideas}}
-          {{#each ideas}}
-            {{> idea}}
-          {{/each}}
-        {{/with}}
+        {{#if ideas}}
+          <p>Something here?</p>
+          {{#with ideas}}
+            {{#each ideas}}
+              {{> idea}}
+            {{/each}}
+          {{/with}}
+        {{else}}
+          <p>Nothing here...</p>
+        {{/if}}
       {{else}}
         <p>Loading...</p>
       {{/if}}

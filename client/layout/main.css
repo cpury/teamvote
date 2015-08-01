@@ -91,3 +91,7 @@ body {
   font-size: 140%;
   width: 70%;
 }
+
+.static-text strong {
+  font-family: 'Open Sans', sans-serif !important;
+}
