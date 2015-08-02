@@ -1,6 +1,3 @@
-Session.setDefault("order_by", "Newest");
-var orderByDependency = new Tracker.Dependency;
-
 Template.listIdeas.onCreated(function () {
   var self = this;
   self.autorun(function () {
@@ -40,15 +37,6 @@ Template.idea.helpers({
   },
   canDeleteIdea: function (idea) {
     return Meteor.userId() == idea.author;
-  }
-});
-
-Template.comment.helpers({
-  commentIsUpvoted: function (comment) {
-    return comment.upvotes.indexOf(Meteor.userId()) != -1;
-  },
-  canDeleteComment: function (comment) {
-    return Meteor.userId() == comment.author;
   }
 });
 
@@ -96,17 +84,6 @@ Template.idea.events({
   }
 });
 
-Template.comment.events({
-  "click .delete-comment": function () {
-    Meteor.call("deleteComment", Template.parentData()._id, this._id);
-    orderByDependency.changed();
-  },
-  "click .upvote-comment": function () {
-    Meteor.call("upvoteComment", Template.parentData()._id, this._id);
-    orderByDependency.changed();
-  }
-});
-
 Template.orderBy.events({
   "change #order-by-form": function (event) {
     var order_by = event.target.value;
@@ -120,23 +97,4 @@ Template.newIdea.onRendered(function() {
   $('input[maxlength]').maxlength({
     alwaysShow: true
   });
-});
-
-Template.newComment.onRendered(function() {
-  $('input[maxlength]').maxlength({
-    alwaysShow: true
-  });
-});
-
-Template.orderBy.onRendered(function() {
-  var order_by = Session.get("order_by");
-  console.log("order by:", order_by);
-  if (!order_by) {
-    order_by = "Newest";
-  }
-});
-
-Accounts.ui.config({
-  passwordSignupFields: "USERNAME_AND_EMAIL",
-  forceEmailLowercase: true
 });
