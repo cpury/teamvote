@@ -18,6 +18,20 @@ Template.comment.events({
   }
 });
 
+Template.newComment.events({
+  "submit .new-comment": function (event) {
+    var text = event.target.text.value;
+
+    Meteor.call("addComment", this._id, text);
+
+    event.target.text.value = "";
+
+    orderByDependency.changed();
+
+    return false;
+  }
+})
+
 Template.newComment.onRendered(function() {
   $('input[maxlength]').maxlength({
     alwaysShow: true

@@ -46,7 +46,7 @@ Template.orderBy.helpers({
   }
 })
 
-Template.listIdeas.events({
+Template.newIdea.events({
   "submit .new-idea": function (event) {
     var title = event.target.title.value;
     var description = event.target.description.value;
@@ -56,17 +56,7 @@ Template.listIdeas.events({
     event.target.title.value = "";
     event.target.description.value = "";
 
-    orderByDependency.changed();
-
-    return false;
-  },
-
-  "submit .new-comment": function (event) {
-    var text = event.target.text.value;
-
-    Meteor.call("addComment", this._id, text);
-
-    event.target.text.value = "";
+    $('#newIdeaModal').modal('hide');
 
     orderByDependency.changed();
 
