@@ -88,25 +88,6 @@ body {
 
 .static-text {
   font-size: 140%;
-  width: 95%;
-}
-
-@media (min-width: 700px) {
-  .static-text {
-    width: 90%;
-  }
-}
-
-@media (min-width: 1000px) {
-  .static-text {
-    width: 80%;
-  }
-}
-
-@media (min-width: 1400px) {
-  .static-text {
-    width: 70%;
-  }
 }
 
 .static-text strong {
