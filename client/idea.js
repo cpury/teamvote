@@ -42,7 +42,7 @@ Template.idea.helpers({
 
 Template.orderBy.helpers({
   isSelected: function (value) {
-    return Session.equals('order_by', value) ? 'selected' : '';
+    return Session.equals('order_by', value) ? 'active' : '';
   }
 })
 
@@ -75,8 +75,8 @@ Template.idea.events({
 });
 
 Template.orderBy.events({
-  "change #order-by-form": function (event) {
-    var order_by = event.target.value;
+  "change .orderByButton": function (event) {
+    var order_by = event.target.id;
 
     Session.set("order_by", order_by);
     orderByDependency.changed();
