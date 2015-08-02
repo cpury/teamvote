@@ -1,8 +1,8 @@
 <template name="listIdeas">
   {{#if Template.subscriptionsReady}}
-    {{#if ideas.count}}
-      {{> toolbar}}
+    {{> toolbar}}
 
+    {{#if ideas.count}}
       <div class="panel-group idea-list" id="accordion">
         {{#with ideas}}
           {{#each ideas}}

@@ -88,3 +88,9 @@ Template.newIdea.onRendered(function() {
     alwaysShow: true
   });
 });
+
+Template.toolbar.onRendered(function() {
+  if (!Meteor.userId()) {
+    $('[data-toggle="popover"]').popover();
+  }
+});
