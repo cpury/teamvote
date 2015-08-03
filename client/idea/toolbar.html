@@ -23,7 +23,7 @@
 </template>
 
 <template name="newIdeaModal">
-  <div class="modal fade" id="newIdeaModal" tabindex="-1" role="dialog" aria-labelledby="newIdeaModelLabel">
+  <div class="modal fade" id="newIdeaModal" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form class="new-idea">
@@ -31,16 +31,16 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="newIdeaModelLabel">Add idea</h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body clearfix">
               <div class="form-group">
                 <div class="input-group input-group-lg">
-                  <span class="input-group-addon large-input">💡</span>
-                  <input type="text" class="form-control large-input" placeholder="Add a new idea" name="title" maxlength="100">
+                  <span class="input-group-addon">💡</span>
+                  <input type="text" class="form-control" placeholder="Title" name="title" maxlength="100" id="newIdeaTitle" autofocus>
                 </div>
 
                 <div class="input-group input-group-lg">
-                  <span class="input-group-addon large-input"><span class="glyphicon glyphicon-pencil"></span></span>
-                  <input type="text" class="form-control" placeholder="Add a description (optional)" name="description" maxlength="200">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                  <input type="text" class="form-control" placeholder="Description (optional)" name="description" maxlength="200">
                 </div>
               </div>
           </div>

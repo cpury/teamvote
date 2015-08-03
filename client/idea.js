@@ -87,6 +87,9 @@ Template.newIdea.onRendered(function() {
   $('input[maxlength]').maxlength({
     alwaysShow: true
   });
+  $('#newIdeaModal').on('shown.bs.modal', function() {
+    $('#newIdeaTitle').focus();
+  });
 });
 
 Template.toolbar.onRendered(function() {
