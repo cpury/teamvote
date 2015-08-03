@@ -88,6 +88,7 @@ body {
 
 .static-text {
   font-size: 140%;
+  text-align: justify;
 }
 
 .static-text strong {
