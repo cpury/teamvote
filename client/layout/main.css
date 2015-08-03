@@ -93,3 +93,8 @@ body {
 .static-text strong {
   font-family: 'Open Sans', sans-serif !important;
 }
+
+#navbar-div {
+  padding-left: 15px;
+  padding-right: 15px;
+}
