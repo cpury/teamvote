@@ -10,11 +10,23 @@ Template.comment.helpers({
 Template.comment.events({
   "click .delete-comment": function () {
     Meteor.call("deleteComment", Template.parentData()._id, this._id);
+
     orderByDependency.changed();
+
+    analytics.track("Delete comment", {
+      _id: this._id,
+      text: this.text
+    });
   },
   "click .upvote-comment": function () {
     Meteor.call("upvoteComment", Template.parentData()._id, this._id);
+
     orderByDependency.changed();
+
+    analytics.track("Toggle upvote comment", {
+      _id: this._id,
+      text: this.text
+    });
   }
 });
 
@@ -27,6 +39,11 @@ Template.newComment.events({
     event.target.text.value = "";
 
     orderByDependency.changed();
+
+    analytics.track("Add comment", {
+      idea: this._id,
+      text: text
+    });
 
     return false;
   }

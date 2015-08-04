@@ -60,6 +60,10 @@ Template.newIdea.events({
 
     orderByDependency.changed();
 
+    analytics.track("Add idea", {
+      title: this.title
+    });
+
     return false;
   }
 });
@@ -67,10 +71,18 @@ Template.newIdea.events({
 Template.idea.events({
   "click .delete-idea": function () {
     Meteor.call("deleteIdea", this._id);
+    analytics.track("Delete idea", {
+      _id: this._id,
+      title: this.title
+    });
   },
   "click .upvote-idea": function () {
     Meteor.call("upvoteIdea", this._id);
     orderByDependency.changed();
+    analytics.track("Toggle upvote idea", {
+      _id: this._id,
+      title: this.title
+    });
   }
 });
 
@@ -80,6 +92,10 @@ Template.orderBy.events({
 
     Session.set("order_by", order_by);
     orderByDependency.changed();
+
+    analytics.track("Changed ordering", {
+      newOrdering: order_by
+    });
   }
 });
 
