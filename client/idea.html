@@ -45,23 +45,23 @@
 
 <template name="ideaHeading">
   <div class="row">
-    <div class="cell col-xs-2 col-md-1">
+    <div class="cell col-xs-1">
       <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
         <i class="glyphicon glyphicon-circle-arrow-up"></i>
         {{upvoteCount}}
       </button>
-    </div>
+    </div><!--
 
-    <div class="cell col-xs-8 col-md-7">
+    --><div class="cell col-xs-11 col-md-8">
       <h4 class="panel-title idea-heading">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
           {{title}}
         </a>
       </h4>
-    </div>
+    </div><!--
 
-    <div class="cell col-md-3 hidden-xs hidden-sm">
-      <div class="btn-group">
+    --><div class="cell col-md-3 hidden-xs hidden-sm">
+      <div class="btn-group pull-right">
         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> {{authorName}}</button>
         <button type="button" class="btn btn-default">
           <i class="glyphicon glyphicon-time"></i>
