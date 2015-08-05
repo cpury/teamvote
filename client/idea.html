@@ -45,14 +45,14 @@
 
 <template name="ideaHeading">
   <div class="row">
-    <div class="cell col-xs-1">
+    <div class="cell col-xs-2 cell col-sm-1" style="text-align: center;">
       <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
         <i class="glyphicon glyphicon-circle-arrow-up"></i>
         {{upvoteCount}}
       </button>
     </div><!--
 
-    --><div class="cell col-xs-11 col-md-8">
+    --><div class="cell col-xs-10 col-sm-11 col-md-8">
       <h4 class="panel-title idea-heading">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
           {{title}}
