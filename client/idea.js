@@ -31,14 +31,17 @@ Template.listIdeas.helpers({
 
 Template.idea.helpers({
   rendered: function () {
-  },
+  }
+});
+
+Template.ideaHeading.helpers({
   ideaIsUpvoted: function (idea) {
     return idea.upvotes.indexOf(Meteor.userId()) != -1;
   },
   canDeleteIdea: function (idea) {
     return Meteor.userId() == idea.author;
   }
-});
+})
 
 Template.orderBy.helpers({
   isSelected: function (value) {

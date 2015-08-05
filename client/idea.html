@@ -34,53 +34,61 @@
 <template name="idea">
   <div id="panel-{{_id}}" class="panel panel-default">
     <div class="panel-heading">
-      <div class="row">
-        <div class="cell col-xs-2 col-md-1">
-          <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
-            <i class="glyphicon glyphicon-circle-arrow-up"></i>
-            {{upvoteCount}}
-          </button>
-        </div>
-
-        <div class="cell col-xs-8 col-md-7">
-          <h4 class="panel-title idea-heading">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
-              {{title}}
-            </a>
-          </h4>
-        </div>
-
-        <div class="cell col-md-3 hidden-xs hidden-sm">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> {{authorName}}</button>
-            <button type="button" class="btn btn-default">
-              <i class="glyphicon glyphicon-time"></i>
-              {{livestamp createdAt}}
-            </button>
-            {{#if canDeleteIdea this}}
-            <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
-            {{/if}}
-          </div>
-        </div>
-      </div>
+      {{>ideaHeading}}
     </div>
 
     <div id="collapse-{{_id}}" class="panel-collapse collapse">
-      <div class="panel-body">
-        {{#if description}}
-          {{description}}
-        {{else}}
-        <em>(No description given.)</em>
+      {{>ideaContent}}
+    </div>
+  </div>
+</template>
+
+<template name="ideaHeading">
+  <div class="row">
+    <div class="cell col-xs-2 col-md-1">
+      <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
+        <i class="glyphicon glyphicon-circle-arrow-up"></i>
+        {{upvoteCount}}
+      </button>
+    </div>
+
+    <div class="cell col-xs-8 col-md-7">
+      <h4 class="panel-title idea-heading">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
+          {{title}}
+        </a>
+      </h4>
+    </div>
+
+    <div class="cell col-md-3 hidden-xs hidden-sm">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> {{authorName}}</button>
+        <button type="button" class="btn btn-default">
+          <i class="glyphicon glyphicon-time"></i>
+          {{livestamp createdAt}}
+        </button>
+        {{#if canDeleteIdea this}}
+        <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
         {{/if}}
-        <div class="comments">
-          <ul class="list-group">
-            {{> newComment}}
-            {{#each comments}}
-              {{> comment}}
-            {{/each}}
-          </ul>
-        </div>
       </div>
+    </div>
+  </div>
+</template>
+
+<template name="ideaContent">
+  <div class="panel-body">
+    {{#if description}}
+      {{description}}
+    {{else}}
+    <em>(No description given.)</em>
+    {{/if}}
+    <div class="comments">
+      <ul class="list-group">
+        {{> newComment}}
+        {{#each comments}}
+          {{> comment}}
+        {{/each}}
+      </ul>
     </div>
   </div>
 </template>
