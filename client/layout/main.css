@@ -101,7 +101,12 @@ body {
 }
 
 .cell {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+.idea-content-well {
+  margin-bottom: 0;
+  padding: 10px;
 }

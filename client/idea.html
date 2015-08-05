@@ -45,14 +45,14 @@
 
 <template name="ideaHeading">
   <div class="row">
-    <div class="cell col-xs-2 cell col-sm-1" style="text-align: center;">
+    <div class="cell col-xs-2 col-sm-1" style="text-align: center;">
       <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
         <i class="glyphicon glyphicon-circle-arrow-up"></i>
         {{upvoteCount}}
       </button>
     </div><!--
 
-    --><div class="cell col-xs-10 col-sm-11 col-md-8">
+    --><div class="cell col-xs-9 col-sm-10">
       <h4 class="panel-title idea-heading">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
           {{title}}
@@ -60,15 +60,10 @@
       </h4>
     </div><!--
 
-    --><div class="cell col-md-3 hidden-xs hidden-sm">
+    --><div class="cell col-xs-1">
       <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> {{authorName}}</button>
-        <button type="button" class="btn btn-default">
-          <i class="glyphicon glyphicon-time"></i>
-          {{livestamp createdAt}}
-        </button>
         {{#if canDeleteIdea this}}
-        <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
+          <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
         {{/if}}
       </div>
     </div>
@@ -77,11 +72,22 @@
 
 <template name="ideaContent">
   <div class="panel-body">
-    {{#if description}}
-      {{description}}
-    {{else}}
-    <em>(No description given.)</em>
-    {{/if}}
+    <div class="row">
+      <div class="col-xs-8 col-sm-9 col-md-10">
+        <p class="well idea-content-well">
+          {{#if description}}
+            {{description}}
+          {{else}}
+            <em>(No description given.)</em>
+          {{/if}}
+        </p>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-2">
+        <div class="pull-right idea-content-well alert alert-info">
+          <em>Added {{livestamp createdAt}} by <b>{{authorName}}</b></em>
+        </div>
+      </div>
+    </div>
     <div class="comments">
       <ul class="list-group">
         {{> newComment}}
