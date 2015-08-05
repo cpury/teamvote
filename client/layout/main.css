@@ -99,3 +99,9 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.cell {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
