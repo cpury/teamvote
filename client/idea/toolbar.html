@@ -15,9 +15,9 @@
       <i class="glyphicon glyphicon-plus-sign"></i> <span class="hidden-xs">Add idea</span>
     </button>
   {{else}}
-    <button type="button" class="btn btn-success pull-left" data-toggle="popover" title="Please log in" data-content="You need a user account to share your ideas with the team!">
+    <a tabindex="0" role="button" class="btn btn-success pull-left" data-toggle="popover" data-trigger="focus" title="Please log in" data-content="You need a user account to share your ideas with the team!">
       <i class="glyphicon glyphicon-plus-sign"></i> Add idea
-    </button>
+    </a>
   {{/if}}
   {{> newIdeaModal}}
 </template>
