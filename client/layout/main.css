@@ -110,3 +110,19 @@ body {
   margin-bottom: 0;
   padding: 10px;
 }
+
+.idea-description {
+  font-size: 120%;
+}
+
+@media (min-width: 768px) {
+    .idea-description {
+      font-size: 140%;
+    }
+}
+
+@media (min-width: 992px) {
+    .idea-description {
+      font-size: 180%;
+    }
+}
