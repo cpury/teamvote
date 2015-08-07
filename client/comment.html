@@ -1,29 +1,35 @@
 <template name="comment">
   <li class="list-group-item">
-    <div class="btn-group pull-right">
-      <button type="button" class="btn btn-default btn-sm">
-        <i class="glyphicon glyphicon-user"></i>
-        {{authorName}}
-      </button>
-      <button type="button" class="btn btn-default btn-sm">
-        <i class="glyphicon glyphicon-time"></i>
-        {{livestamp createdAt}}
-      </button>
-      {{#if canDeleteComment this}}
-      <button type="button" class="btn btn-default btn-sm delete-comment">
-        <i class="glyphicon glyphicon-trash"></i>
-      </button>
-      {{/if}}
+    <div class="row">
+      <div class="cell col-xs-2 col-sm-2 col-md-1" style="text-align: center;">
+        <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} btn-sm upvote-comment pull-left">
+          <i class="glyphicon glyphicon-circle-arrow-up"></i>
+          {{upvoteCount}}
+        </button>
+      </div><!--
+
+      --><div class="cell col-xs-8 col-sm-6 col-md-8">
+        <h5 class="panel-title comment-body">
+          {{text}}
+        </h5>
+      </div><!--
+
+      --><div class="cell hidden-xs col-sm-3 col-md-2">
+        <div class="pull-right idea-content-well alert alert-info">
+          <small><em><b>{{authorName}}</b> {{livestamp createdAt}}</em></small>
+        </div>
+      </div><!--
+
+      --><div class="cell col-xs-2 col-sm-1 col-md-1">
+        <div class="btn-group btn-group-xs pull-right">
+          {{#if canDeleteComment this}}
+          <button type="button" class="btn btn-default delete-comment">
+            <i class="glyphicon glyphicon-trash"></i>
+          </button>
+          {{/if}}
+        </div>
+      </div>
     </div>
-
-    <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} btn-sm upvote-comment pull-left">
-      <i class="glyphicon glyphicon-circle-arrow-up"></i>
-      {{upvoteCount}}
-    </button>
-
-    <h5 class="panel-title pull-left comment-body">
-      {{text}}
-    </h5>
   </li>
 </template>
 
