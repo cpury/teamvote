@@ -54,6 +54,11 @@ Template.newIdea.events({
     var title = event.target.title.value;
     var description = event.target.description.value;
 
+    if (!title) {
+      $('#newIdeaTitle').focus();
+      return false;
+    }
+
     Meteor.call("addIdea", title, description);
 
     event.target.title.value = "";
