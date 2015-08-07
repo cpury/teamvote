@@ -95,9 +95,19 @@ body {
 }
 
 .cell {
+  /*display: inline-block;*/
+  vertical-align: middle;
+  /*float: none;*/
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.cell-sm {
   display: inline-block;
   vertical-align: middle;
   float: none;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 .idea-content-well {
