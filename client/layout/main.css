@@ -123,6 +123,10 @@ body {
   font-size: 90%;
 }
 
+.comment-body a {
+  color: #337ab7;
+}
+
 .comment-row {
   margin-left: -12px;
   margin-right: -12px;

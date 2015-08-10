@@ -76,7 +76,7 @@
       <div class="col-xs-8 col-sm-9 col-md-10">
         <p class="well idea-content-well idea-description">
           {{#if description}}
-            {{description}}
+            {{#autolink}}{{description}}{{/autolink}}
           {{else}}
             <em>(No description given.)</em>
           {{/if}}

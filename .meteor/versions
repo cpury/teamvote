@@ -32,6 +32,7 @@ jquery@1.11.3_2
 json@1.0.3
 kadira:blaze-layout@2.0.0
 kadira:flow-router@2.0.1
+konecty:autolinker@1.0.2
 lai:collection-extensions@0.1.4
 launch-screen@1.0.2
 less@1.0.14
