@@ -13,6 +13,7 @@
     {{else}}
       {{> noIdeas}}
     {{/if}}
+    {{> onlineUserList}}
   {{else}}
     <br />
     <h1 class="text-center">
@@ -109,4 +110,15 @@
       </ul>
     </div>
   </div>
+</template>
+
+<template name="onlineUserList">
+  <small class="pull-right text-right">
+    <strong><i class="glyphicon glyphicon-user"></i> Online users:</strong>
+    <ul class="list-inline">
+      {{#each onlineUsers}}
+        <li>{{username}}</li>
+      {{/each}}
+    </ul>
+  </small>
 </template>

@@ -8,3 +8,7 @@ Meteor.startup(function () {
 Meteor.publish("ideas", function () {
   return Ideas.find({});
 });
+
+Meteor.publish("onlineUsers", function() {
+  return Meteor.users.find({ "status.online": true }, { "username": 1 });
+});

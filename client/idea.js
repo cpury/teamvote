@@ -1,3 +1,5 @@
+Meteor.subscribe("onlineUsers");
+
 Template.listIdeas.onCreated(function () {
   var self = this;
   self.autorun(function () {
@@ -36,13 +38,19 @@ Template.ideaHeading.helpers({
   canDeleteIdea: function (idea) {
     return Meteor.userId() == idea.author;
   }
-})
+});
 
 Template.orderBy.helpers({
   isSelected: function (value) {
     return Session.equals('order_by', value) ? 'active' : '';
   }
-})
+});
+
+Template.onlineUserList.helpers({
+  onlineUsers: function () {
+    return Meteor.users.find({ "status.online": true }, { "username": 1 });
+  }
+});
 
 Template.newIdea.events({
   "submit .new-idea": function (event) {
