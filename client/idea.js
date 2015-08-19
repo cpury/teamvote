@@ -29,11 +29,6 @@ Template.listIdeas.helpers({
   }
 });
 
-Template.idea.helpers({
-  rendered: function () {
-  }
-});
-
 Template.ideaHeading.helpers({
   ideaIsUpvoted: function (idea) {
     return idea.upvotes.indexOf(Meteor.userId()) != -1;
@@ -107,6 +102,12 @@ Template.orderBy.events({
   }
 });
 
+Template.ideaHeading.onRendered(function() {
+  if (!Meteor.userId()) {
+    $('.upvote-idea').popover();
+  }
+});
+
 Template.newIdea.onRendered(function() {
   $('input[maxlength]').maxlength({
     alwaysShow: true
@@ -118,6 +119,6 @@ Template.newIdea.onRendered(function() {
 
 Template.toolbar.onRendered(function() {
   if (!Meteor.userId()) {
-    $('[data-toggle="popover"]').popover();
+    $('#new-idea-button').popover();
   }
 });

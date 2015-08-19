@@ -51,10 +51,17 @@
 <template name="ideaHeading">
   <div class="row">
     <div class="cell col-xs-2 col-sm-1" style="text-align: center;">
-      <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
-        <i class="glyphicon glyphicon-circle-arrow-up"></i>
-        {{upvoteCount}}
-      </button>
+      {{#if currentUser}}
+        <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
+          <i class="glyphicon glyphicon-circle-arrow-up"></i>
+          {{upvoteCount}}
+        </button>
+      {{else}}
+        <a tabindex="0" role="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea" data-toggle="popover" data-trigger="focus" title="Please log in" data-content="You need a user account to vote on ideas.">
+          <i class="glyphicon glyphicon-circle-arrow-up"></i>
+          {{upvoteCount}}
+        </a>
+      {{/if}}
     </div><!--
 
     --><div class="cell col-xs-9 col-sm-10">

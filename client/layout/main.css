@@ -161,3 +161,7 @@ body {
       margin-right: 0;
     }
 }
+
+.popover{
+    max-width: 100%;
+}
