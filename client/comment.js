@@ -34,6 +34,11 @@ Template.newComment.events({
   "submit .new-comment": function (event) {
     var text = event.target.text.value;
 
+    if (!text) {
+      $('#newCommentText').focus();
+      return false;
+    }
+
     Meteor.call("addComment", this._id, text);
 
     event.target.text.value = "";
