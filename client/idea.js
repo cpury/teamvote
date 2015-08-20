@@ -34,9 +34,6 @@ Template.listIdeas.helpers({
 Template.ideaHeading.helpers({
   ideaIsUpvoted: function (idea) {
     return idea.upvotes.indexOf(Meteor.userId()) != -1;
-  },
-  canDeleteIdea: function (idea) {
-    return Meteor.userId() == idea.author;
   }
 });
 

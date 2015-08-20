@@ -75,12 +75,16 @@
 
     --><div class="cell col-xs-1">
       <div class="btn-group pull-right btn-group-sm">
-        {{#if canDeleteIdea this}}
-          <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
-        {{/if}}
+        {{>ideaToolbar}}
       </div>
     </div>
   </div>
+</template>
+
+<template name="ideaToolbar">
+{{#if userOwnsIdea this}}
+  <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
+{{/if}}
 </template>
 
 <template name="ideaContent">

@@ -1,9 +1,6 @@
 Template.comment.helpers({
   commentIsUpvoted: function (comment) {
     return comment.upvotes.indexOf(Meteor.userId()) != -1;
-  },
-  canDeleteComment: function (comment) {
-    return Meteor.userId() == comment.author;
   }
 });
 
