@@ -50,7 +50,7 @@ Template.onlineUserList.helpers({
 });
 
 Template.newIdea.events({
-  "submit .new-idea": function (event) {
+  "submit #new-idea": function (event) {
     var title = event.target.title.value;
     var description = event.target.description.value;
 
@@ -76,7 +76,40 @@ Template.newIdea.events({
   }
 });
 
+Template.editIdeaModal.events({
+  "submit #edit-idea": function (event) {
+    var id = Session.get("editIdeaId");
+    var title = event.target.title.value;
+    var description = event.target.description.value;
+
+    if (!title) {
+      $('#editIdeaTitle').focus();
+      return false;
+    }
+
+    Meteor.call("editIdea", id, title, description);
+
+    event.target.title.value = "";
+    event.target.description.value = "";
+    Session.set("editIdeaId", undefined);
+
+    $('#editIdeaModal').modal('hide');
+
+    analytics.track("Edit idea", {
+      title: event.target.title.value
+    });
+
+    return false;
+  }
+});
+
 Template.idea.events({
+  "click .edit-idea": function () {
+    Session.set("editIdeaId", this._id);
+    $('#editIdeaModal').modal('show');
+    $('#editIdeaTitle').val(this.title);
+    $('#editIdeaDescription').val(this.description);
+  },
   "click .delete-idea": function () {
     Meteor.call("deleteIdea", this._id);
     analytics.track("Delete idea", {

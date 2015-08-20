@@ -166,5 +166,9 @@ body {
 }
 
 .popover{
-    max-width: 100%;
+  max-width: 100%;
+}
+
+.idea-toolbar{
+  padding-top: 7px;
 }
