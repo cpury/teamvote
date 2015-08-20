@@ -65,26 +65,24 @@
       {{/if}}
     </div><!--
 
-    --><div class="cell col-xs-9 col-sm-10">
+    --><div class="cell {{#if userOwnsIdea this}}col-xs-9 col-sm-10{{else}}col-xs-10 col-sm-11{{/if}}">
       <h4 class="panel-title idea-heading">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
           {{title}}
         </a>
       </h4>
-    </div><!--
+    </div>{{#if userOwnsIdea this}}<!--
 
     --><div class="cell col-xs-1">
       <div class="btn-group pull-right btn-group-sm">
         {{>ideaToolbar}}
       </div>
-    </div>
+    </div>{{/if}}
   </div>
 </template>
 
 <template name="ideaToolbar">
-{{#if userOwnsIdea this}}
   <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
-{{/if}}
 </template>
 
 <template name="ideaContent">
