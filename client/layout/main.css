@@ -25,6 +25,7 @@ body {
   font-size: 20px;
   padding-top: 7px;
   padding-left: 20px;
+  word-wrap: break-word;
 }
 
 .input-group-addon {
@@ -117,9 +118,11 @@ body {
 
 .idea-description {
   font-size: 110%;
+  word-wrap: break-word;
 }
 
 .comment-body {
+  word-wrap: break-word;
   font-size: 90%;
 }
 
