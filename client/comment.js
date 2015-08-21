@@ -10,6 +10,8 @@ Template.comment.events({
 
     orderByDependency.changed();
 
+    sAlert.success('Comment has been deleted successfully');
+
     analytics.track("Delete comment", {
       _id: this._id,
       text: this.text
@@ -33,6 +35,7 @@ Template.newComment.events({
 
     if (!text) {
       $('#newCommentText').focus();
+      sAlert.error('Please provide a comment body');
       return false;
     }
 
@@ -41,6 +44,8 @@ Template.newComment.events({
     event.target.text.value = "";
 
     orderByDependency.changed();
+
+    sAlert.success('Comment has been added successfully');
 
     analytics.track("Add comment", {
       idea: this._id,

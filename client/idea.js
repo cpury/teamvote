@@ -56,6 +56,7 @@ Template.newIdea.events({
 
     if (!title) {
       $('#newIdeaTitle').focus();
+      sAlert.error('Please provide a title');
       return false;
     }
 
@@ -67,6 +68,8 @@ Template.newIdea.events({
     $('#newIdeaModal').modal('hide');
 
     orderByDependency.changed();
+
+    sAlert.success('Idea has been added successfully');
 
     analytics.track("Add idea", {
       title: this.title
@@ -84,6 +87,7 @@ Template.editIdeaModal.events({
 
     if (!title) {
       $('#editIdeaTitle').focus();
+      sAlert.error('Please provide a title');
       return false;
     }
 
@@ -94,6 +98,8 @@ Template.editIdeaModal.events({
     Session.set("editIdeaId", undefined);
 
     $('#editIdeaModal').modal('hide');
+
+    sAlert.success('Idea has been edited successfully');
 
     analytics.track("Edit idea", {
       title: event.target.title.value
@@ -116,6 +122,7 @@ Template.idea.events({
       _id: this._id,
       title: this.title
     });
+    sAlert.success('Idea has been deleted successfully');
   },
   "click .upvote-idea": function () {
     Meteor.call("upvoteIdea", this._id);
