@@ -26,4 +26,17 @@ Meteor.startup(function () {
       }
     }
   });
+
+  Ideas.find({"author": { $ne: Meteor.userId() }}).observe({
+    changed: function (newIdea, oldIdea) {
+      if (!Session.get("ideasLoaded")) {
+        return;
+      }
+
+      if (newIdea.title != oldIdea.title || newIdea.description != oldIdea.description) {
+        // Edited title or description
+        sAlert.info(newIdea.authorName + " edited the idea \"" + newIdea.title + "\"");
+      }
+    }
+  });
 });
