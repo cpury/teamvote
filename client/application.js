@@ -37,6 +37,22 @@ Meteor.startup(function () {
         // Edited title or description
         sAlert.info(newIdea.authorName + " edited the idea \"" + newIdea.title + "\"");
       }
+
+      if (newIdea.commentCount > oldIdea.commentCount) {
+        // Added a new comment
+        newComment = newIdea.comments[0];
+        sAlert.info(newComment.authorName + " added a comment to \"" + newIdea.title + "\"");
+      }
+
+      if (newIdea.commentCount < oldIdea.commentCount) {
+        // Deleted a comment
+        deletedComment = oldIdea.comments.filter(function (current) {
+          return newIdea.comments.filter(function (current_new) {
+            return current_new._id == current._id;
+          }).length == 0;
+        })[0];
+        sAlert.info(deletedComment.authorName + " deleted a comment to \"" + newIdea.title + "\"");
+      }
     }
   });
 });

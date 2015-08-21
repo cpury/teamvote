@@ -71,7 +71,7 @@ Template.newIdea.events({
 
     orderByDependency.changed();
 
-    sAlert.success('Idea has been added successfully');
+    sAlert.success('Idea added successfully');
 
     analytics.track("Add idea", {
       title: this.title
@@ -101,7 +101,7 @@ Template.editIdeaModal.events({
 
     $('#editIdeaModal').modal('hide');
 
-    sAlert.success('Idea has been edited successfully');
+    sAlert.success('Idea edited successfully');
 
     analytics.track("Edit idea", {
       title: event.target.title.value
@@ -124,7 +124,7 @@ Template.idea.events({
       _id: this._id,
       title: this.title
     });
-    sAlert.success('Idea has been deleted successfully');
+    sAlert.success('Idea deleted successfully');
   },
   "click .upvote-idea": function () {
     Meteor.call("upvoteIdea", this._id);

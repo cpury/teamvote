@@ -10,7 +10,7 @@ Template.comment.events({
 
     orderByDependency.changed();
 
-    sAlert.success('Comment has been deleted successfully');
+    sAlert.success('Comment deleted successfully');
 
     analytics.track("Delete comment", {
       _id: this._id,
@@ -45,7 +45,7 @@ Template.newComment.events({
 
     orderByDependency.changed();
 
-    sAlert.success('Comment has been added successfully');
+    sAlert.success('Comment added successfully');
 
     analytics.track("Add comment", {
       idea: this._id,
