@@ -1,35 +1,37 @@
 <template name="comment">
   <li class="list-group-item">
-    <div class="row comment-row">
-      <div class="cell-sm col-xs-3 col-sm-2 col-md-1" style="text-align: center;">
-        <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} btn-sm upvote-comment pull-left">
-          <i class="glyphicon glyphicon-circle-arrow-up"></i>
-          {{upvoteCount}}
-        </button>
-      </div><!--
-
-      --><div class="cell-sm col-xs-7 col-sm-6 col-md-8">
-        <h5 class="panel-title comment-body">
-          {{#autolink}}{{text}}{{/autolink}}
-        </h5>
-      </div><!--
-
-      --><div class="cell-sm hidden-xs col-sm-3 col-md-2">
-        <div class="pull-right idea-content-well alert alert-info">
-          <small><em><b>{{authorName}}</b> {{livestamp createdAt}}</em></small>
-        </div>
-      </div><!--
-
-      --><div class="cell-sm col-xs-2 col-sm-1 col-md-1">
-        <div class="btn-group btn-group-xs pull-right">
-          {{#if userOwnsComment this}}
-          <button type="button" class="btn btn-default delete-comment">
-            <i class="glyphicon glyphicon-trash"></i>
+    <table class="comment-table">
+      <tr>
+        <td class="comment-button-td">
+          <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} btn-sm upvote-comment pull-left">
+            <i class="glyphicon glyphicon-circle-arrow-up"></i>
+            {{upvoteCount}}
           </button>
-          {{/if}}
-        </div>
-      </div>
-    </div>
+        </td>
+
+        <td class="comment-title-td">
+          <h5 class="panel-title comment-body">
+            {{#autolink}}{{text}}{{/autolink}}
+          </h5>
+        </td>
+
+        <td class="comment-timestamp-td">
+          <div class="pull-right comment-timestamp alert alert-info">
+            <small><em><b>{{authorName}}</b> {{livestamp createdAt}}</em></small>
+          </div>
+        </td>
+
+        {{#if userOwnsComment this}}
+          <td class="comment-toolbar-td">
+            <div class="btn-group btn-group-xs pull-right">
+              <button type="button" class="btn btn-default delete-comment">
+                <i class="glyphicon glyphicon-trash"></i>
+              </button>
+            </div>
+          </td>
+        {{/if}}
+      </tr>
+    </table>
   </li>
 </template>
 

@@ -24,8 +24,8 @@ body {
 .idea-heading {
   font-size: 20px;
   padding-top: 7px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -137,6 +137,12 @@ body {
   margin-right: -12px;
 }
 
+.comment-timestamp {
+  font-size: 80%;
+  margin-bottom: 0;
+  padding: 10px;
+}
+
 @media (min-width: 768px) {
     .idea-description {
       font-size: 120%;
@@ -150,6 +156,10 @@ body {
       margin-left: -5px;
       margin-right: -5px;
     }
+
+    .comment-timestamp {
+      font-size: 88%;
+    }
 }
 
 @media (min-width: 992px) {
@@ -161,9 +171,8 @@ body {
       font-size: 120%;
     }
 
-    .comment-row {
-      margin-left: 0;
-      margin-right: 0;
+    .comment-timestamp {
+      font-size: 100%;
     }
 }
 
@@ -220,4 +229,36 @@ body {
 
 .idea-heading-title-td {
 
+}
+
+.comment-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.comment-button-td {
+  width: 50px;
+}
+
+.comment-toolbar-td {
+  width: 30px;
+}
+
+.comment-timestamp-td {
+  width: 20%;
+}
+
+.comment-title-td {
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+@media (min-width: 992px) {
+  .comment-timestamp-td {
+    width: 15%;
+  }
+
+  .comment-toolbar-td {
+    width: 35px;
+  }
 }
