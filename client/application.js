@@ -57,6 +57,13 @@ Meteor.startup(function () {
           sAlert.info(deletedComment.authorName + " deleted a comment to \"" + newIdea.title + "\"");
         }
       }
+    },
+    removed: function (oldIdea) {
+      if (!Session.get("ideasLoaded") || oldIdea.author == Meteor.userId()) {
+        return;
+      }
+
+      sAlert.info(oldIdea.authorName + " removed the idea \"" + oldIdea.title + "\"");
     }
   });
 });
