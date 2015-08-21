@@ -51,33 +51,35 @@
 </template>
 
 <template name="ideaHeading">
-  <div class="row">
-    <div class="cell col-xs-2 col-sm-1" style="text-align: center;">
-      {{#if currentUser}}
-        <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
-          <i class="glyphicon glyphicon-circle-arrow-up"></i>
-          {{upvoteCount}}
-        </button>
-      {{else}}
-        <a tabindex="0" role="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea" data-toggle="popover" data-trigger="focus" title="Please log in" data-content="You need a user account to vote on ideas.">
-          <i class="glyphicon glyphicon-circle-arrow-up"></i>
-          {{upvoteCount}}
-        </a>
+  <table class="idea-heading-table">
+    <tr>
+      <td class="idea-heading-button-td">
+        {{#if currentUser}}
+          <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
+            <i class="glyphicon glyphicon-circle-arrow-up"></i>
+            {{upvoteCount}}
+          </button>
+        {{else}}
+          <a tabindex="0" role="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea" data-toggle="popover" data-trigger="focus" title="Please log in" data-content="You need a user account to vote on ideas.">
+            <i class="glyphicon glyphicon-circle-arrow-up"></i>
+            {{upvoteCount}}
+          </a>
+        {{/if}}
+      </td>
+      <td class="idea-heading-title-td">
+        <h4 class="panel-title idea-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
+            {{title}}
+          </a>
+        </h4>
+      </td>
+      {{#if userOwnsIdea this}}
+        <td class="idea-heading-toolbar-td">
+          {{>ideaToolbar}}
+        </td>
       {{/if}}
-    </div><!--
-
-    --><div class="cell {{#if userOwnsIdea this}}col-xs-8 col-sm-10{{else}}col-xs-10 col-sm-11{{/if}}">
-      <h4 class="panel-title idea-heading">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
-          {{title}}
-        </a>
-      </h4>
-    </div>{{#if userOwnsIdea this}}<!--
-
-    --><div class="cell col-xs-2 col-sm-1">
-      {{>ideaToolbar}}
-    </div>{{/if}}
-  </div>
+    </tr>
+  </table>
 </template>
 
 <template name="ideaToolbar">

@@ -25,7 +25,9 @@ body {
   font-size: 20px;
   padding-top: 7px;
   padding-left: 20px;
+  padding-right: 20px;
   word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .input-group-addon {
@@ -201,4 +203,21 @@ body {
 .s-alert-error {
   background-color: #d9534f;
   border-color: #d43f3a;
+}
+
+.idea-heading-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.idea-heading-button-td {
+  width: 50px;
+}
+
+.idea-heading-toolbar-td {
+  width: 60px;
+}
+
+.idea-heading-title-td {
+
 }
