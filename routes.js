@@ -9,6 +9,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/about/', {
   action: function() {
+    Session.set("ideasLoaded", false);
     BlazeLayout.render('mainLayout', { main: "staticAbout" });
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
@@ -17,6 +18,7 @@ FlowRouter.route('/about/', {
 
 FlowRouter.route('/contact/', {
   action: function() {
+    Session.set("ideasLoaded", false);
     BlazeLayout.render('mainLayout', { main: "staticContact" });
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
