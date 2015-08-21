@@ -17,7 +17,7 @@ Meteor.startup(function () {
     offset: 10
   });
 
-  Ideas.find({}).observeChanges({
+  Ideas.find({"author": { $ne: Meteor.userId() }}).observeChanges({
     added: function (id, idea) {
       sAlert.info("New idea \"" + idea.title + "\" by " + idea.authorName);
     }
