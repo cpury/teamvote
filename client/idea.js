@@ -5,7 +5,9 @@ Template.listIdeas.onCreated(function () {
   self.autorun(function () {
     var projectId = FlowRouter.getParam("projectId");
     // TODO: Use projectId later on.
-    self.subscribe("ideas");
+    self.subscribe("ideas", function () {
+      Session.set("ideasLoaded", true);
+    });
   });
 });
 

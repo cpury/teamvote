@@ -6,6 +6,8 @@ Accounts.ui.config({
   forceEmailLowercase: true
 });
 
+Session.set("ideasLoaded", false);
+
 Meteor.startup(function () {
   sAlert.config({
     effect: 'slide',
@@ -19,7 +21,9 @@ Meteor.startup(function () {
 
   Ideas.find({"author": { $ne: Meteor.userId() }}).observeChanges({
     added: function (id, idea) {
-      sAlert.info("New idea \"" + idea.title + "\" by " + idea.authorName);
+      if (Session.get("ideasLoaded")) {
+        sAlert.info("New idea \"" + idea.title + "\" by " + idea.authorName);
+      }
     }
   });
 });

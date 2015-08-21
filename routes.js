@@ -1,5 +1,6 @@
 FlowRouter.route('/', {
   action: function() {
+    Session.set("ideasLoaded", false);
     BlazeLayout.render('mainLayout', { main: "listIdeas" });
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
