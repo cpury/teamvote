@@ -172,3 +172,33 @@ body {
 .idea-toolbar{
   padding-top: 7px;
 }
+
+.s-alert-box {
+  border-radius: 4px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 30px;
+  font-size: 16px;
+  border: 1px solid transparent;
+}
+
+.s-alert-info {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+.s-alert-success {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.s-alert-warning {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.s-alert-error {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}

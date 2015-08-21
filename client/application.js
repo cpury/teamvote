@@ -14,6 +14,6 @@ Meteor.startup(function () {
     html: false,
     onRouteClose: false,
     stack: true,
-    offset: 20
+    offset: 10
   });
 });
