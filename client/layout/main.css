@@ -262,3 +262,9 @@ body {
     width: 35px;
   }
 }
+
+@media (max-width: 768px) {
+  .container .jumbotron {
+    padding: 10px;
+  }
+}
