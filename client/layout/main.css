@@ -24,8 +24,8 @@ body {
 .idea-heading {
   font-size: 20px;
   padding-top: 7px;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 2%;
+  padding-right: 2%;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -220,7 +220,7 @@ body {
 }
 
 .idea-heading-button-td {
-  width: 50px;
+  width: 100px;
 }
 
 .idea-heading-toolbar-td {
