@@ -220,7 +220,11 @@ body {
 }
 
 .idea-heading-button-td {
-  width: 100px;
+  width: 80px;
+}
+
+.idea-heading-badges-td {
+  width: 30px;
 }
 
 .idea-heading-toolbar-td {

@@ -63,7 +63,7 @@
 <template name="ideaHeading">
   <table class="idea-heading-table">
     <tr>
-      <td class="idea-heading-button-td">
+      <td class="idea-heading-button-td text-center">
         {{#if currentUser}}
           <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
             <i class="glyphicon glyphicon-circle-arrow-up"></i>
@@ -75,12 +75,15 @@
             {{upvoteCount}}
           </a>
         {{/if}}
+      </td>
 
-        <small>
-          &nbsp;
-          <i class="glyphicon glyphicon-comment"></i>
-          {{commentCount}}
-        </small>
+      <td class="idea-heading-badges-td text-center hidden-xs">
+        {{#if commentCount}}
+          <span class="badge" style="padding-left: 5px">
+              <i class="glyphicon glyphicon-comment"></i>
+              {{commentCount}}
+          </span>
+        {{/if}}
       </td>
 
       <td class="idea-heading-title-td">
