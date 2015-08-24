@@ -253,6 +253,22 @@ body {
   padding-right: 1%;
 }
 
+#projectHeading h1 {
+  font-size: 1.8em;
+}
+
+@media (max-width: 768px) {
+  .container .jumbotron {
+    padding: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  #projectHeading h1 {
+    font-size: 2.15em;
+  }
+}
+
 @media (min-width: 992px) {
   .comment-timestamp-td {
     width: 15%;
@@ -261,10 +277,8 @@ body {
   .comment-toolbar-td {
     width: 35px;
   }
-}
 
-@media (max-width: 768px) {
-  .container .jumbotron {
-    padding: 10px;
+  #projectHeading h1 {
+    font-size: 2.5em;
   }
 }
