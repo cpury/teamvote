@@ -14,8 +14,11 @@
     {{else}}
       {{> noIdeas}}
     {{/if}}
-    {{> onlineUserList}}
-    {{> editIdeaModal}}
+
+    {{#if currentUser}}
+      {{> onlineUserList}}
+      {{> editIdeaModal}}
+    {{/if}}
   {{else}}
     <br />
     <h1 class="text-center">
@@ -45,6 +48,8 @@
     {{else}}
       <h4>Log in to start brainstorming!</h4>
     {{/if}}
+    <br />
+    <br />
   </div>
 </template>
 
