@@ -19,7 +19,7 @@ Meteor.startup(function () {
     offset: 10
   });
 
-  Ideas.find({"author": { $ne: Meteor.userId() }}).observeChanges({
+  Ideas.find({"authorId": { $ne: Meteor.userId() }}).observeChanges({
     added: function (id, idea) {
       if (Session.get("ideasLoaded")) {
         sAlert.info("New idea \"" + idea.title + "\" by " + idea.authorName);
@@ -33,7 +33,7 @@ Meteor.startup(function () {
         return;
       }
 
-      if (newIdea.author != Meteor.userId() && (newIdea.title != oldIdea.title || newIdea.description != oldIdea.description)) {
+      if (newIdea.authorId != Meteor.userId() && (newIdea.title != oldIdea.title || newIdea.description != oldIdea.description)) {
         // Edited title or description
         sAlert.info(newIdea.authorName + " edited the idea \"" + newIdea.title + "\"");
       }
@@ -41,7 +41,7 @@ Meteor.startup(function () {
       if (newIdea.commentCount > oldIdea.commentCount) {
         // Added a new comment
         newComment = newIdea.comments[0];
-        if (newComment.author != Meteor.userId()) {
+        if (newComment.authorId != Meteor.userId()) {
           sAlert.info(newComment.authorName + " added a comment to \"" + newIdea.title + "\"");
         }
       }
@@ -53,13 +53,13 @@ Meteor.startup(function () {
             return current_new._id == current._id;
           }).length == 0;
         })[0];
-        if (deletedComment.author != Meteor.userId()) {
+        if (deletedComment.authorId != Meteor.userId()) {
           sAlert.info(deletedComment.authorName + " deleted a comment to \"" + newIdea.title + "\"");
         }
       }
     },
     removed: function (oldIdea) {
-      if (!Session.get("ideasLoaded") || oldIdea.author == Meteor.userId()) {
+      if (!Session.get("ideasLoaded") || oldIdea.authorId == Meteor.userId()) {
         return;
       }
 
