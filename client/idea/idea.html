@@ -1,7 +1,7 @@
 <template name="listIdeas">
   {{#if Template.subscriptionsReady}}
     {{> projectHeading}}
-    {{> toolbar}}
+    {{> ideaToolbar}}
 
     {{#if ideas.count}}
       <div class="panel-group idea-list" id="accordion">
@@ -22,7 +22,7 @@
   {{else}}
     <br />
     <h1 class="text-center">
-      Loading the app...<br />
+      Loading ideas...<br />
       <small>Just a second :)</small>
     </h1>
     {{> spinner}}
@@ -101,14 +101,14 @@
 
       {{#if userOwnsIdea this}}
         <td class="idea-heading-toolbar-td">
-          {{>ideaToolbar}}
+          {{>ideaButtons}}
         </td>
       {{/if}}
     </tr>
   </table>
 </template>
 
-<template name="ideaToolbar">
+<template name="ideaButtons">
   <div class="btn-group pull-right btn-group-xs idea-toolbar">
     <button type="button" class="btn btn-default edit-idea"><i class="glyphicon glyphicon-pencil"></i></button>
     <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>

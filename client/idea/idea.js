@@ -4,8 +4,7 @@ Template.listIdeas.onCreated(function () {
   var self = this;
   self.autorun(function () {
     var projectId = FlowRouter.getParam("projectId");
-    // TODO: Use projectId later on.
-    self.subscribe("ideas", function () {
+    self.subscribe("ideas", projectId, function () {
       Session.set("ideasLoaded", true);
     });
   });
@@ -55,6 +54,7 @@ Template.newIdea.events({
   "submit #new-idea": function (event) {
     var title = event.target.title.value;
     var description = event.target.description.value;
+    var currentProject = Session.get("currentProject");
 
     if (!title) {
       $('#newIdeaTitle').focus();
@@ -62,7 +62,7 @@ Template.newIdea.events({
       return false;
     }
 
-    Meteor.call("addIdea", title, description);
+    Meteor.call("addIdea", currentProject, title, description);
 
     event.target.title.value = "";
     event.target.description.value = "";
@@ -164,7 +164,7 @@ Template.newIdea.onRendered(function() {
   });
 });
 
-Template.toolbar.onRendered(function() {
+Template.ideaToolbar.onRendered(function() {
   if (!Meteor.userId()) {
     $('#new-idea-button').popover();
   }

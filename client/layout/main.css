@@ -30,6 +30,13 @@ body {
   overflow-wrap: break-word;
 }
 
+.project-heading {
+  font-size: 20px;
+  padding-right: 2%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 .input-group-addon {
   min-width:55px;
   text-align:center;
@@ -42,11 +49,6 @@ body {
 .comments {
   padding-top: 15px;
 }
-
-/*#list-body {
-  width: 80%;
-  margin-top: 10px;
-}*/
 
 .comments ul {
   list-style: none;
@@ -83,6 +85,10 @@ body {
   margin-top: 30px;
 }
 
+.project-list {
+  margin-top: 30px;
+}
+
 .static-text {
   font-size: 140%;
   text-align: justify;
@@ -95,22 +101,6 @@ body {
 #navbar-div {
   padding-left: 15px;
   padding-right: 15px;
-}
-
-.cell {
-  /*display: inline-block;*/
-  vertical-align: middle;
-  /*float: none;*/
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.cell-sm {
-  display: inline-block;
-  vertical-align: middle;
-  float: none;
-  padding-left: 7px;
-  padding-right: 7px;
 }
 
 .idea-content-well {
@@ -219,6 +209,11 @@ body {
   table-layout: fixed;
 }
 
+.project-heading-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
 .idea-heading-button-td {
   width: 80px;
 }
@@ -228,6 +223,10 @@ body {
 }
 
 .idea-heading-toolbar-td {
+  width: 60px;
+}
+
+.project-heading-toolbar-td {
   width: 60px;
 }
 
