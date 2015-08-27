@@ -30,12 +30,14 @@
 </template>
 
 <template name="projectHeading">
-  <div id="projectHeading" class="text-center panel panel-primary lead">
-    <div class="panel-heading">
-      <small><em>Max asks:</em></small><br />
-      <h1 style="margin: 0">How can TeamVote be improved?</h1>
+  {{#if project}}
+    <div id="projectHeading" class="text-center panel panel-primary lead">
+      <div class="panel-heading">
+        <small><em>{{project.authorName}} asks:</em></small><br />
+        <h1 style="margin: 0">{{project.title}}<br /><small>{{project.description}}</small></h1>
+      </div>
     </div>
-  </div>
+  {{/if}}
 </template>
 
 <template name="noIdeas">

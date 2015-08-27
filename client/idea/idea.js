@@ -7,6 +7,7 @@ Template.listIdeas.onCreated(function () {
     self.subscribe("ideas", projectId, function () {
       Session.set("ideasLoaded", true);
     });
+    self.subscribe("projects");
   });
 });
 
@@ -29,6 +30,13 @@ Template.listIdeas.helpers({
     }
 
     return Ideas.find({});
+  }
+});
+
+Template.projectHeading.helpers({
+  project: function () {
+    projectId = Session.get("currentProject");
+    return Projects.findOne(projectId);
   }
 });
 
