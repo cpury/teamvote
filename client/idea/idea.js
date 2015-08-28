@@ -58,6 +58,15 @@ Template.onlineUserList.helpers({
   }
 });
 
+Template.projectHeading.events({
+  "shown.bs.collapse #projectHeading": function () {
+    $("#projectHeading .collapseArrow").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-left");
+  },
+  "hidden.bs.collapse #projectHeading": function () {
+    $("#projectHeading .collapseArrow").removeClass("glyphicon-chevron-left").addClass("glyphicon-chevron-down");
+  }
+});
+
 Template.newIdea.events({
   "submit #new-idea": function (event) {
     var title = event.target.title.value;
