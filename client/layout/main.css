@@ -260,6 +260,14 @@ body {
   font-size: 1.8em;
 }
 
+#projectHeading a {
+  text-decoration: none;
+}
+
+#projectHeading h3 {
+  font-size: 1.2em;
+}
+
 @media (max-width: 768px) {
   .container .jumbotron {
     padding: 10px;
@@ -269,6 +277,10 @@ body {
 @media (min-width: 768px) {
   #projectHeading h1 {
     font-size: 2.1em;
+  }
+
+  #projectHeading h3 {
+    font-size: 1.5em;
   }
 }
 
@@ -283,6 +295,10 @@ body {
 
   #projectHeading h1 {
     font-size: 2.5em;
+  }
+
+  #projectHeading h3 {
+    font-size: 1.8em;
   }
 }
 
