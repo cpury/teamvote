@@ -11,6 +11,11 @@ Meteor.startup(function () {
 
   Ideas.find({"authorId": { $ne: Meteor.userId() }}).observeChanges({
     added: function (id, idea) {
+      if (idea.authorId == Meteor.userId()) {
+        // Sometimes, this happens...
+        return;
+      }
+
       if (Session.get("ideasLoaded")) {
         sAlert.info("New idea \"" + idea.title + "\" by " + idea.authorName);
       }
