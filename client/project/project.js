@@ -24,20 +24,28 @@ Template.newProject.events({
       return false;
     }
 
-    Meteor.call("addProject", title, description);
+    Meteor.call("addProject", title, description, function (err, data) {
+      if (err) {
+        console.log("Error while adding project:", err);
+        return;
+      }
+
+      $('#newProjectModal').removeClass('fade');
+
+      orderByDependency.changed();
+
+      sAlert.success('Project added successfully');
+      analytics.track("Add project", {
+        title: this.title
+      });
+
+      FlowRouter.go('/' + data + '/');
+    });
 
     event.target.title.value = "";
     event.target.description.value = "";
 
     $('#newProjectModal').modal('hide');
-
-    orderByDependency.changed();
-
-    sAlert.success('Project added successfully');
-
-    analytics.track("Add project", {
-      title: this.title
-    });
 
     return false;
   }
