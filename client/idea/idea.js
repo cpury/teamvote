@@ -79,20 +79,26 @@ Template.newIdea.events({
       return false;
     }
 
-    Meteor.call("addIdea", currentProject, title, description);
+    Meteor.call("addIdea", currentProject, title, description, function (err, data) {
+      if (err) {
+        sAlert.error('Failed to add idea...');
+        console.log("Error while adding idea:", err);
+        return;
+      }
+
+      orderByDependency.changed();
+
+      sAlert.success('Idea added successfully');
+
+      analytics.track("Add idea", {
+        title: this.title
+      });
+    });
 
     event.target.title.value = "";
     event.target.description.value = "";
 
     $('#newIdeaModal').modal('hide');
-
-    orderByDependency.changed();
-
-    sAlert.success('Idea added successfully');
-
-    analytics.track("Add idea", {
-      title: this.title
-    });
 
     return false;
   }
@@ -110,19 +116,25 @@ Template.editIdeaModal.events({
       return false;
     }
 
-    Meteor.call("editIdea", id, title, description);
+    Meteor.call("editIdea", id, title, description, function (err, data) {
+      if (err) {
+        sAlert.error('Failed to edit idea...');
+        console.log("Error while editing idea:", err);
+        return;
+      }
+
+      sAlert.success('Idea edited successfully');
+
+      analytics.track("Edit idea", {
+        title: event.target.title.value
+      });
+    });
 
     event.target.title.value = "";
     event.target.description.value = "";
     Session.set("editIdeaId", undefined);
 
     $('#editIdeaModal').modal('hide');
-
-    sAlert.success('Idea edited successfully');
-
-    analytics.track("Edit idea", {
-      title: event.target.title.value
-    });
 
     return false;
   }
@@ -136,19 +148,33 @@ Template.idea.events({
     $('#editIdeaDescription').val(this.description);
   },
   "click .delete-idea": function () {
-    Meteor.call("deleteIdea", this._id);
-    analytics.track("Delete idea", {
-      _id: this._id,
-      title: this.title
+    Meteor.call("deleteIdea", this._id, function (err, data) {
+      if (err) {
+        sAlert.error('Failed to delete idea...');
+        console.log("Error while deleting idea:", err);
+        return;
+      }
+
+      sAlert.success('Idea deleted successfully');
+      analytics.track("Delete idea", {
+        _id: this._id,
+        title: this.title
+      });
     });
-    sAlert.success('Idea deleted successfully');
   },
   "click .upvote-idea": function () {
-    Meteor.call("upvoteIdea", this._id);
-    orderByDependency.changed();
-    analytics.track("Toggle upvote idea", {
-      _id: this._id,
-      title: this.title
+    Meteor.call("upvoteIdea", this._id, function (err, data) {
+      if (err) {
+        sAlert.error('Failed to upvote idea...');
+        console.log("Error while upvoting idea:", err);
+        return;
+      }
+
+      orderByDependency.changed();
+      analytics.track("Toggle upvote idea", {
+        _id: this._id,
+        title: this.title
+      });
     });
   }
 });
