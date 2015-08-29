@@ -5,7 +5,17 @@ FlowRouter.route('/', {
     BlazeLayout.render('mainLayout', { main: "listProjects" });
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-  name: "List Projects"
+  name: "List projects"
+});
+
+FlowRouter.route('/how-it-works/', {
+  action: function() {
+    Session.set("ideasLoaded", false);
+    Session.set("projectsLoaded", false);
+    BlazeLayout.render('mainLayout', { main: "staticHowItWorks" });
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  },
+  name: "How it works page"
 });
 
 FlowRouter.route('/about/', {
@@ -15,7 +25,7 @@ FlowRouter.route('/about/', {
     BlazeLayout.render('mainLayout', { main: "staticAbout" });
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-  name: "About Page"
+  name: "About page"
 });
 
 FlowRouter.route('/contact/', {
@@ -25,7 +35,7 @@ FlowRouter.route('/contact/', {
     BlazeLayout.render('mainLayout', { main: "staticContact" });
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-  name: "Contact Page"
+  name: "Contact page"
 });
 
 FlowRouter.route('/:projectId/', {
