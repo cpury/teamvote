@@ -129,7 +129,12 @@ body {
 }
 
 .static-text {
-  font-size: 90%;
+  font-size: 140%;
+  line-height: 120%;
+}
+
+.static-text h2 {
+  font-size: 160%;
 }
 
 @media (min-width: 768px) {
@@ -151,7 +156,11 @@ body {
     }
 
     .static-text {
-      font-size: 120%;
+      font-size: 160%;
+    }
+
+    .static-text h2 {
+      font-size: 170%;
     }
 }
 
@@ -169,6 +178,10 @@ body {
     }
 
     .static-text {
+      font-size: 180%;
+    }
+
+    .static-text h2 {
       font-size: 180%;
     }
 }
