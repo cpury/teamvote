@@ -89,11 +89,6 @@ body {
   margin-top: 30px;
 }
 
-.static-text {
-  font-size: 140%;
-  text-align: justify;
-}
-
 .static-text strong {
   font-family: 'Roboto', 'Open Sans', sans-serif !important;
 }
@@ -133,6 +128,10 @@ body {
   padding: 10px;
 }
 
+.static-text {
+  font-size: 90%;
+}
+
 @media (min-width: 768px) {
     .idea-description {
       font-size: 120%;
@@ -150,6 +149,10 @@ body {
     .comment-timestamp {
       font-size: 88%;
     }
+
+    .static-text {
+      font-size: 120%;
+    }
 }
 
 @media (min-width: 992px) {
@@ -163,6 +166,10 @@ body {
 
     .comment-timestamp {
       font-size: 100%;
+    }
+
+    .static-text {
+      font-size: 180%;
     }
 }
 
