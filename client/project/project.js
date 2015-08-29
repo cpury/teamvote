@@ -113,6 +113,27 @@ Template.project.events({
   }
 });
 
+Template.welcome.events({
+  "click .toggle-signup": function () {
+    if(!Meteor.userId()) {
+      $('#signup-link').click();
+      if (!$('#login-dropdown-list').hasClass('open')) {
+        Template._loginButtons.toggleDropdown();
+      }
+    }
+    return false;
+  },
+  "click .toggle-login": function () {
+    if(!Meteor.userId()) {
+      $('#back-to-login-link').click();
+      if(!$('#login-dropdown-list').hasClass('open')) {
+        Template._loginButtons.toggleDropdown();
+      }
+    }
+    return false;
+  }
+});
+
 Template.newProject.onRendered(function() {
   $('input[maxlength]').maxlength({
     alwaysShow: true
