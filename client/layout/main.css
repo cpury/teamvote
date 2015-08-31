@@ -137,53 +137,71 @@ body {
   font-size: 160%;
 }
 
+#welcome {
+  zoom: 0.7;
+}
+
+@media (min-width: 550px) {
+  #welcome {
+    zoom: 0.8;
+  }
+}
+
 @media (min-width: 768px) {
-    .idea-description {
-      font-size: 120%;
-    }
+  #welcome {
+    zoom: 0.9;
+  }
 
-    .comment-body {
-      font-size: 100%;
-    }
+  .idea-description {
+    font-size: 120%;
+  }
 
-    .comment-row {
-      margin-left: -5px;
-      margin-right: -5px;
-    }
+  .comment-body {
+    font-size: 100%;
+  }
 
-    .comment-timestamp {
-      font-size: 88%;
-    }
+  .comment-row {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
 
-    .static-text {
-      font-size: 160%;
-    }
+  .comment-timestamp {
+    font-size: 88%;
+  }
 
-    .static-text h2 {
-      font-size: 170%;
-    }
+  .static-text {
+    font-size: 160%;
+  }
+
+  .static-text h2 {
+    font-size: 170%;
+  }
 }
 
 @media (min-width: 992px) {
-    .idea-description {
-      font-size: 140%;
-    }
+  #welcome {
+    zoom: 1;
+  }
 
-    .comment-body {
-      font-size: 120%;
-    }
+  .idea-description {
+    font-size: 140%;
+  }
 
-    .comment-timestamp {
-      font-size: 100%;
-    }
+  .comment-body {
+    font-size: 120%;
+  }
 
-    .static-text {
-      font-size: 180%;
-    }
+  .comment-timestamp {
+    font-size: 100%;
+  }
 
-    .static-text h2 {
-      font-size: 180%;
-    }
+  .static-text {
+    font-size: 180%;
+  }
+
+  .static-text h2 {
+    font-size: 180%;
+  }
 }
 
 .popover{
