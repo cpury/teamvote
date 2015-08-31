@@ -83,10 +83,12 @@ body {
 
 .idea-list {
   margin-top: 30px;
+  zoom: 0.8;
 }
 
 .project-list {
   margin-top: 30px;
+  zoom: 0.8;
 }
 
 .static-text strong {
@@ -145,11 +147,27 @@ body {
   .jumbotron {
     zoom: 0.8;
   }
+
+  .idea-list {
+    zoom: 0.9;
+  }
+
+  .project-list {
+    zoom: 0.9;
+  }
 }
 
 @media (min-width: 768px) {
   .jumbotron {
     zoom: 0.9;
+  }
+
+  .idea-list {
+    zoom: 1;
+  }
+
+  .project-list {
+    zoom: 1;
   }
 
   .idea-description {
