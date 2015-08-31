@@ -116,6 +116,9 @@ Template.project.events({
 Template.welcome.events({
   "click .toggle-signup": function () {
     if(!Meteor.userId()) {
+      if($('.navbar-toggle').is(':visible') && !$('.navbar-collapse').hasClass('in')) {
+        $('.navbar-toggle').click();
+      }
       $('#signup-link').click();
       if (!$('#login-dropdown-list').hasClass('open')) {
         Template._loginButtons.toggleDropdown();
@@ -125,6 +128,9 @@ Template.welcome.events({
   },
   "click .toggle-login": function () {
     if(!Meteor.userId()) {
+      if($('.navbar-toggle').is(':visible') && !$('.navbar-collapse').hasClass('in')) {
+        $('.navbar-toggle').click();
+      }
       $('#back-to-login-link').click();
       if(!$('#login-dropdown-list').hasClass('open')) {
         Template._loginButtons.toggleDropdown();
