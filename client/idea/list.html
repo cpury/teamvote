@@ -34,14 +34,20 @@
     <div id="projectHeading" class="text-center panel panel-primary lead">
       <div class="panel-heading">
         <small><em>{{project.authorName}} asks:</em></small><br />
-        <a data-toggle="collapse" href="#projectDescriptionCollapse">
+        {{#if project.description}}
+          <a data-toggle="collapse" href="#projectDescriptionCollapse">
+            <h1 style="margin: 0">
+              {{project.title}}
+                <small class="pull-right">
+                  <i class="glyphicon glyphicon-chevron-down collapseArrow"></i>
+                </small>
+            </h1>
+          </a>
+        {{else}}
           <h1 style="margin: 0">
             {{project.title}}
-            <small class="pull-right">
-              <i class="glyphicon glyphicon-chevron-down collapseArrow"></i>
-            </small>
           </h1>
-        </a>
+        {{/if}}
       </div>
       <div class="collapse" id="projectDescriptionCollapse">
         <h3 style="margin: 0; padding: 10px">{{project.description}}</h3>
