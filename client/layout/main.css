@@ -137,18 +137,18 @@ body {
   font-size: 160%;
 }
 
-#welcome {
+.jumbotron {
   zoom: 0.7;
 }
 
 @media (min-width: 550px) {
-  #welcome {
+  .jumbotron {
     zoom: 0.8;
   }
 }
 
 @media (min-width: 768px) {
-  #welcome {
+  .jumbotron {
     zoom: 0.9;
   }
 
@@ -179,7 +179,7 @@ body {
 }
 
 @media (min-width: 992px) {
-  #welcome {
+  .jumbotron {
     zoom: 1;
   }
 
