@@ -49,3 +49,11 @@ FlowRouter.route('/:projectId/', {
   },
   name: "Project detail"
 });
+
+FlowRouter.notFound = {
+  action: function() {
+    prepareRoute();
+    BlazeLayout.render('404');
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+};
