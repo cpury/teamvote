@@ -11,6 +11,10 @@ Meteor.publish("projects", function () {
   return Projects.find({});
 });
 
+Meteor.publish("currentProject", function (projectId) {
+  return Projects.find(projectId);
+});
+
 Meteor.publish("ideas", function (projectId) {
   return Ideas.find({"projectId": projectId});
 });

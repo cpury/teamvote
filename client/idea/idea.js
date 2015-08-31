@@ -4,10 +4,15 @@ Template.listIdeas.onCreated(function () {
   var self = this;
   self.autorun(function () {
     var projectId = FlowRouter.getParam("projectId");
+    self.subscribe("currentProject", projectId, function () {
+      if (!Projects.findOne(projectId)) {
+        Session.set("currentProject", null);
+        BlazeLayout.render('404');
+      }
+    });
     self.subscribe("ideas", projectId, function () {
       Session.set("ideasLoaded", true);
     });
-    self.subscribe("projects");
   });
 });
 
