@@ -1,6 +1,6 @@
 <template name="idea">
-  <div id="panel-{{_id}}" class="panel panel-default">
-    <div class="panel-heading">
+  <div id="panel-{{_id}}" class="panel panel-default idea-panel">
+    <div class="panel-heading idea-panel-heading">
       {{>ideaHeading}}
     </div>
 
@@ -13,7 +13,7 @@
 <template name="ideaHeading">
   <table class="idea-heading-table">
     <tr>
-      <td class="idea-heading-button-td text-center">
+      <td class="idea-heading-button-td">
         {{#if currentUser}}
           <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}info{{else}}default{{/if}} upvote-idea">
             <i class="glyphicon glyphicon-circle-arrow-up"></i>
@@ -36,13 +36,13 @@
         {{/if}}
       </td>
 
-      <td class="idea-heading-title-td">
-        <h4 class="panel-title idea-heading">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}">
+        <div style="height:100%;width:100%" class="idea-heading-title-td">
+          <h4 class="panel-title idea-heading">
             {{title}}
-          </a>
-        </h4>
-      </td>
+          </h4>
+        </div>
+      </a>
 
       {{#if userOwnsIdea this}}
         <td class="idea-heading-toolbar-td">

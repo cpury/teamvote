@@ -28,6 +28,7 @@ body {
   padding-right: 2%;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  width: 100%;
 }
 
 .project-heading {
@@ -150,6 +151,19 @@ h1 small {
 .project-heading-table a {
   text-decoration: none;
   color: black;
+}
+
+.idea-heading-table a {
+  text-decoration: none;
+  color: black;
+}
+
+.idea-heading-title-td {
+  width: 100%;
+}
+
+.idea-panel-heading:hover {
+  background-color: #f5f5f5;
 }
 
 .jumbotron {
