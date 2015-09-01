@@ -15,8 +15,9 @@
     <tr>
       <td class="idea-heading-button-td">
         {{#if currentUser}}
-          <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}info{{else}}default{{/if}} upvote-idea">
-            <i class="glyphicon glyphicon-circle-arrow-up"></i>
+          <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}info{{
+else}}default{{/if}} upvote-idea">
+            <i class="glyphicon glyphicon-heart{{#unless ideaIsUpvoted this}}-empty{{/unless}}"></i>
             {{upvoteCount}}
           </button>
         {{else}}

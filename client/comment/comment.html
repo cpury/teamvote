@@ -3,8 +3,8 @@
     <table class="comment-table">
       <tr>
         <td class="comment-button-td">
-          <button type="button" class="btn btn-{{#if commentIsUpvoted this}}success{{else}}default{{/if}} btn-sm upvote-comment pull-left">
-            <i class="glyphicon glyphicon-circle-arrow-up"></i>
+          <button type="button" class="btn btn-{{#if commentIsUpvoted this}}info{{else}}default{{/if}} btn-sm upvote-comment pull-left">
+            <i class="glyphicon glyphicon-heart{{#unless commentIsUpvoted this}}-empty{{/unless}}"></i>
             {{upvoteCount}}
           </button>
         </td>
