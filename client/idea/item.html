@@ -29,10 +29,10 @@
 
       <td class="idea-heading-badges-td text-center hidden-xs">
         {{#if commentCount}}
-          <span class="badge" style="padding-left: 5px">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}" class="badge" style="padding-left: 5px">
               <i class="glyphicon glyphicon-comment"></i>
               {{commentCount}}
-          </span>
+          </a>
         {{/if}}
       </td>
 
