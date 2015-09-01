@@ -1,15 +1,16 @@
 <template name="project">
-  <li id="project-{{_id}}" class="list-group-item">
+  <a id="project-{{_id}}" class="list-group-item">
     <table class="project-heading-table">
       <tr>
-        <td class="project-heading-title-td">
-          <h4 class="panel-title project-heading">
-            <a href="/{{_id}}/">
+        <a href="/{{_id}}/">
+          <td class="project-heading-title-td">
+            <h4 class="panel-title project-heading">
               {{title}}
+              <br />
               <small>{{description}}</small>
-            </a>
-          </h4>
-        </td>
+            </h4>
+          </td>
+        </a>
 
         {{#if userOwnsProject this}}
           <td class="project-heading-toolbar-td">
@@ -18,13 +19,13 @@
         {{/if}}
       </tr>
     </table>
-  </li>
+  </a>
 </template>
 
 <template name="projectButtons">
   <div class="btn-group pull-right btn-group-xs project-toolbar">
-    <button type="button" class="btn btn-default edit-project"><i class="glyphicon glyphicon-pencil"></i></button>
-    <button type="button" class="btn btn-default delete-project"><i class="glyphicon glyphicon-trash"></i></button>
+    <button type="button" class="btn btn-danger edit-project"><i class="glyphicon glyphicon-pencil"></i></button>
+    <button type="button" class="btn btn-danger delete-project"><i class="glyphicon glyphicon-trash"></i></button>
   </div>
 </template>
 

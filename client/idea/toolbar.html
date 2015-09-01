@@ -57,15 +57,15 @@
 <template name="orderBy">
   <label class="pull-left" style="padding-top: 6px; padding-right: 8px;">Order by:</label>
   <div class="btn-group" data-toggle="buttons">
-    <label class="btn btn-default {{isSelected "Newest"}}" title="Age">
+    <label class="btn btn-info {{isSelected "Newest"}}" title="Age">
       <input type="radio" name="options" id="Newest" autocomplete="off" class="orderByButton">
       <i class="glyphicon glyphicon-time"></i>
     </label>
-    <label class="btn btn-default {{isSelected "Upvotes"}}" title="Upvotes">
+    <label class="btn btn-info {{isSelected "Upvotes"}}" title="Upvotes">
       <input type="radio" name="options" id="Upvotes" autocomplete="off" class="orderByButton">
       <i class="glyphicon glyphicon-circle-arrow-up"></i>
     </label>
-    <label class="btn btn-default {{isSelected "Comments"}}" title="Comments">
+    <label class="btn btn-info {{isSelected "Comments"}}" title="Comments">
       <input type="radio" name="options" id="Comments" autocomplete="off" class="orderByButton">
       <i class="glyphicon glyphicon-comment"></i>
     </label>

@@ -7,13 +7,13 @@
     {{> projectToolbar}}
 
     {{#if projects.count}}
-      <ul class="project-list list-group">
+      <div class="project-list list-group">
         {{#with projects}}
           {{#each projects}}
             {{> project}}
           {{/each}}
         {{/with}}
-      </ul>
+      </div>
     {{else}}
       {{> noProjects}}
     {{/if}}

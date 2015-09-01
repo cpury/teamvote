@@ -15,12 +15,12 @@
     <tr>
       <td class="idea-heading-button-td text-center">
         {{#if currentUser}}
-          <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea">
+          <button type="button" class="btn btn-{{#if ideaIsUpvoted this}}info{{else}}default{{/if}} upvote-idea">
             <i class="glyphicon glyphicon-circle-arrow-up"></i>
             {{upvoteCount}}
           </button>
         {{else}}
-          <a tabindex="0" role="button" class="btn btn-{{#if ideaIsUpvoted this}}success{{else}}default{{/if}} upvote-idea" data-toggle="popover" data-trigger="focus" title="Please log in" data-content="You need a user account to vote on ideas.">
+          <a tabindex="0" role="button" class="btn btn-{{#if ideaIsUpvoted this}}info{{else}}default{{/if}} upvote-idea" data-toggle="popover" data-trigger="focus" title="Please log in" data-content="You need a user account to vote on ideas.">
             <i class="glyphicon glyphicon-circle-arrow-up"></i>
             {{upvoteCount}}
           </a>
@@ -55,8 +55,8 @@
 
 <template name="ideaButtons">
   <div class="btn-group pull-right btn-group-xs idea-toolbar">
-    <button type="button" class="btn btn-default edit-idea"><i class="glyphicon glyphicon-pencil"></i></button>
-    <button type="button" class="btn btn-default delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
+    <button type="button" class="btn btn-danger edit-idea"><i class="glyphicon glyphicon-pencil"></i></button>
+    <button type="button" class="btn btn-danger delete-idea"><i class="glyphicon glyphicon-trash"></i></button>
   </div>
 </template>
 
