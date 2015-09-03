@@ -13,6 +13,12 @@ Template.listProjects.helpers({
   }
 });
 
+Template.project.helpers({
+  toUrl: function (projectId) {
+    return String(projectId);
+  }
+});
+
 Template.newProject.events({
   "submit #new-project": function (event) {
     var title = event.target.title.value;
