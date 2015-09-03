@@ -259,33 +259,31 @@ h1 small {
 }
 
 .s-alert-box {
-  border-radius: 3px;
+  border-radius: 4px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
   padding-right: 30px;
-  text-transform: uppercase;
   font-size: 16px;
   color: white;
-  border: none;
-  -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 4px 4px 20px rgba(0,0,0,0.6);
+  box-shadow: 4px 4px 20px rgba(0,0,0,0.6);
 }
 
 .s-alert-info {
-  background-color: #9c27b0;
+  background-color: #02a5de;
 }
 
 .s-alert-success {
-  background-color: #4caf50;
+  background-color: #4da309;
 }
 
 .s-alert-warning {
-  background-color: #ff9800;
+  background-color: #a54caa;
 }
 
 .s-alert-error {
-  background-color: #e51c23;
+  background-color: #e08b27;
 }
 
 .idea-heading-table {
