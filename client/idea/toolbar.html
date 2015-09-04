@@ -12,11 +12,11 @@
 <template name="newIdea">
   {{#if currentUser}}
     <button type="button" id="new-idea-button" class="btn btn-success pull-left" data-toggle="modal" data-target="#newIdeaModal">
-      <i class="glyphicon glyphicon-plus-sign"></i> <span class="hidden-xs">Add idea</span>
+      <i class="glyphicon glyphicon-plus-sign"></i> New Idea
     </button>
   {{else}}
     <a tabindex="0" role="button" id="new-idea-button" class="btn btn-success pull-left" data-toggle="popover" data-trigger="focus" title="Please log in" data-content="You need a user account to share your ideas with the team!">
-      <i class="glyphicon glyphicon-plus-sign"></i> Add idea
+      <i class="glyphicon glyphicon-plus-sign"></i> New Idea
     </a>
   {{/if}}
   {{> newIdeaModal}}
