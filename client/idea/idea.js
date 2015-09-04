@@ -204,11 +204,11 @@ Template.ideaHeading.onRendered(function() {
 });
 
 Template.newIdea.onRendered(function() {
-  $('input[maxlength]').maxlength({
-    alwaysShow: true
-  });
   $('#newIdeaModal').on('shown.bs.modal', function() {
-    $('#newIdeaTitle').focus();
+    $('input[maxlength]').maxlength({
+      alwaysShow: true
+    });
+    setTimeout(function(){ $('#newIdeaTitle').focus(); }, 150);
   });
 });
 

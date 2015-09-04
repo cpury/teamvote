@@ -147,11 +147,11 @@ Template.welcome.events({
 });
 
 Template.newProject.onRendered(function() {
-  $('input[maxlength]').maxlength({
-    alwaysShow: true
-  });
   $('#newProjectModal').on('shown.bs.modal', function() {
-    $('#newProjectTitle').focus();
+    $('input[maxlength]').maxlength({
+      alwaysShow: true
+    });
+    setTimeout(function(){ $('#newProjectTitle').focus(); }, 150);
   });
 });
 
