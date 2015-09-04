@@ -9,6 +9,7 @@
               <br />
               <small>{{description}}</small>
             </h4>
+            {{>projectMetaInfo}}
           </div>
         </a>
 
@@ -26,6 +27,13 @@
   <div class="btn-group pull-right btn-group-xs project-toolbar">
     <button type="button" class="btn btn-danger edit-project"><i class="glyphicon glyphicon-pencil"></i></button>
     <button type="button" class="btn btn-danger delete-project"><i class="glyphicon glyphicon-trash"></i></button>
+  </div>
+</template>
+
+<template name="projectMetaInfo">
+  <div class="project-meta-info">
+    <i class="glyphicon glyphicon-info-sign"></i>
+    Added by <b>{{ authorName }}</b> {{livestamp createdAt}}.
   </div>
 </template>
 
