@@ -155,6 +155,15 @@ Template.newProject.onRendered(function() {
   });
 });
 
+Template.editProjectModal.onRendered(function() {
+  $('#editProjectModal').on('shown.bs.modal', function() {
+    $('input[maxlength]').maxlength({
+      alwaysShow: true
+    });
+    setTimeout(function(){ $('#editProjectTitle').focus(); }, 150);
+  });
+});
+
 Template.projectToolbar.onRendered(function() {
   if (!Meteor.userId()) {
     $('#new-project-button').popover();

@@ -212,6 +212,15 @@ Template.newIdea.onRendered(function() {
   });
 });
 
+Template.editIdeaModal.onRendered(function() {
+  $('#editIdeaModal').on('shown.bs.modal', function() {
+    $('input[maxlength]').maxlength({
+      alwaysShow: true
+    });
+    setTimeout(function(){ $('#editIdeaTitle').focus(); }, 150);
+  });
+});
+
 Template.ideaToolbar.onRendered(function() {
   if (!Meteor.userId()) {
     $('#new-idea-button').popover();
