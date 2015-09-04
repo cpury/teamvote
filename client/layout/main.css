@@ -305,11 +305,11 @@ h1 small {
 }
 
 .idea-heading-toolbar-td {
-  width: 60px;
+  width: 65px;
 }
 
 .project-heading-toolbar-td {
-  width: 60px;
+  width: 65px;
 }
 
 .idea-heading-title-td {
@@ -394,4 +394,14 @@ h1 small {
   padding-left: 10px;
   padding-top: 5px;
   color: grey;
+}
+
+.project-button {
+  color: grey;
+  font-size: 150% !important;
+}
+
+.idea-button {
+  color: grey;
+  font-size: 150% !important;
 }
