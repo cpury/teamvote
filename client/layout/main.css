@@ -155,11 +155,6 @@ h1 small {
   color: black;
 }
 
-.idea-heading-table a {
-  text-decoration: none;
-  color: black;
-}
-
 .idea-heading-title-td {
   width: 100%;
 }
@@ -303,6 +298,11 @@ h1 small {
 
 .idea-heading-badges-td {
   width: 30px;
+}
+
+.idea-heading-title-td {
+  text-decoration: none !important;
+  color: black !important;
 }
 
 .idea-heading-toolbar-td {
