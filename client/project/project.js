@@ -102,19 +102,28 @@ Template.project.events({
     $('#editProjectDescription').val(this.description);
   },
   "click .delete-project": function () {
-    Meteor.call("deleteProject", this._id, function (err, data) {
-      if (err) {
-        sAlert.error('Failed to delete project...');
-        console.log("Error while deleting project:", err);
+    var projectId = this._id;
+    var projectTitle = this.title;
+
+    bootbox.confirm("Are you sure you want to delete \"" + projectTitle + "\"?", function(result) {
+      if (!result) {
         return;
       }
 
-      analytics.track("Delete project", {
-        _id: this._id,
-        title: this.title
-      });
+      Meteor.call("deleteProject", projectId, function (err, data) {
+        if (err) {
+          sAlert.error('Failed to delete project...');
+          console.log("Error while deleting project:", err);
+          return;
+        }
 
-      sAlert.success('Project deleted successfully');
+        analytics.track("Delete project", {
+          _id: projectId,
+          title: projectTitle
+        });
+
+        sAlert.success('Project deleted successfully');
+      });
     });
   }
 });

@@ -407,3 +407,11 @@ h1 small {
   color: grey;
   font-size: 120% !important;
 }
+
+.bootbox-confirm {
+  top: 15%;
+}
+
+.bootbox-confirm .bootbox-body {
+  font-size: 180%;
+}
