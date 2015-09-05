@@ -6,7 +6,7 @@ Template.comment.helpers({
 
 Template.comment.events({
   "click .delete-comment": function () {
-    var deleteCommentProjectId = Session.get("currentProject");
+    var deleteCommentProjectId = Session.get("currentProjectId");
     var deleteCommentIdeaId = Template.parentData()._id;
     var deleteCommentId = this._id;
     var deleteCommentText = this.text;
@@ -29,7 +29,7 @@ Template.comment.events({
     });
   },
   "click .upvote-comment": function () {
-    var upvoteCommentProjectId = Session.get("currentProject");
+    var upvoteCommentProjectId = Session.get("currentProjectId");
     var upvoteCommentIdeaId = Template.parentData()._id;
     var upvoteCommentId = this._id;
     var upvoteCommentText = this.text;
@@ -53,7 +53,7 @@ Template.comment.events({
 
 Template.newComment.events({
   "submit .new-comment": function (event) {
-    var addCommentProjectId = Session.get("currentProject");
+    var addCommentProjectId = Session.get("currentProjectId");
     var addCommentIdeaId = this._id;
     var addCommenttext = event.target.text.value;
 

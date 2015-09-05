@@ -6,7 +6,7 @@ Template.listIdeas.onCreated(function () {
     var projectId = FlowRouter.getParam("projectId");
     self.subscribe("currentProject", projectId, function () {
       if (!Projects.findOne(projectId)) {
-        Session.set("currentProject", null);
+        Session.set("currentProjectId", null);
         BlazeLayout.render('404');
       }
     });
@@ -40,7 +40,7 @@ Template.listIdeas.helpers({
 
 Template.projectHeading.helpers({
   project: function () {
-    projectId = Session.get("currentProject");
+    projectId = Session.get("currentProjectId");
     return Projects.findOne(projectId);
   }
 });
@@ -74,7 +74,7 @@ Template.projectHeading.events({
 
 Template.newIdea.events({
   "submit #new-idea": function (event) {
-    var newIdeaProjectId = Session.get("currentProject");
+    var newIdeaProjectId = Session.get("currentProjectId");
     var newIdeaTitle = event.target.title.value;
     var newIdeaDescription = event.target.description.value;
 
@@ -111,7 +111,7 @@ Template.newIdea.events({
 
 Template.editIdeaModal.events({
   "submit #edit-idea": function (event) {
-    var editIdeaProjectId = Session.get("currentProject");
+    var editIdeaProjectId = Session.get("currentProjectId");
     var editIdeaId = Session.get("editIdeaId");
     var editIdeaTitle = event.target.title.value;
     var editIdeaDescription = event.target.description.value;
@@ -155,7 +155,7 @@ Template.idea.events({
     $('#editIdeaDescription').val(this.description);
   },
   "click .delete-idea": function () {
-    var deleteIdeaProjectId = Session.get("currentProject");
+    var deleteIdeaProjectId = Session.get("currentProjectId");
     var deleteIdeaId = this._id;
     var deleteIdeaTitle = this.title;
 
@@ -184,7 +184,7 @@ Template.idea.events({
       return;
     }
 
-    var upvoteIdeaProjectId = Session.get("currentProject");
+    var upvoteIdeaProjectId = Session.get("currentProjectId");
     var upvoteIdeaId = this._id;
     var upvoteIdeaTitle = this.title;
 

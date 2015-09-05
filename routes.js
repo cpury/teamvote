@@ -43,7 +43,7 @@ FlowRouter.route('/contact/', {
 FlowRouter.route('/:projectId/', {
   action: function(params, queryParams) {
     prepareRoute();
-    Session.set("currentProject", params.projectId);
+    Session.set("currentProjectId", params.projectId);
     BlazeLayout.render('mainLayout', { main: "listIdeas" });
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
