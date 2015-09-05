@@ -30,27 +30,30 @@
 </template>
 
 <template name="projectHeading">
-  {{#if project}}
-    <div id="projectHeading" class="text-center panel panel-info lead">
+  {{#if currentProject}}
+    <div id="projectHeading" class="text-center panel {{projectHeadingClass currentProject}} lead">
       <div class="panel-heading">
-        <small><em>{{project.authorName}} asks:</em></small><br />
-        {{#if project.description}}
+        <small><em>{{currentProject.authorName}} asks:</em></small><br />
+        {{#if currentProject.description}}
           <a data-toggle="collapse" href="#projectDescriptionCollapse">
             <h1 style="margin: 0">
-              {{project.title}}
-                <small class="pull-right">
-                  <i class="glyphicon glyphicon-chevron-down collapseArrow"></i>
-                </small>
+              {{currentProject.title}}
+              {{#unless currentProject.active}}
+                <small><em>(inactive)</em></small>
+              {{/unless}}
+              <small class="pull-right">
+                <i class="glyphicon glyphicon-chevron-down collapseArrow"></i>
+              </small>
             </h1>
           </a>
         {{else}}
           <h1 style="margin: 0">
-            {{project.title}}
+            {{currentProject.title}}
           </h1>
         {{/if}}
       </div>
       <div class="collapse" id="projectDescriptionCollapse">
-        <h3 style="margin: 0; padding: 10px">{{project.description}}</h3>
+        <h3 style="margin: 0; padding: 10px">{{currentProject.description}}</h3>
       </div>
     </div>
   {{/if}}

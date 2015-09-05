@@ -39,9 +39,12 @@ Template.listIdeas.helpers({
 });
 
 Template.projectHeading.helpers({
-  project: function () {
-    projectId = Session.get("currentProjectId");
-    return Projects.findOne(projectId);
+  projectHeadingClass: function (project) {
+    if (project.active) {
+      return "panel-info";
+    } else {
+      return "panel-primary";
+    }
   }
 });
 
