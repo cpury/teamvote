@@ -1,3 +1,8 @@
+Template.registerHelper("currentProject", function () {
+  projectId = Session.get("currentProjectId");
+  return Projects.findOne(projectId);
+});
+
 Template.registerHelper("userOwnsProject", function (project) {
   return Meteor.userId() == project.authorId;
 });
