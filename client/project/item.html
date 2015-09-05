@@ -6,6 +6,9 @@
           <div style="height:100%;width:100%" class="project-heading-title-td">
             <h4 class="panel-title project-heading">
               {{title}}
+              {{#unless active}}
+                <em>(inactive)</em>
+              {{/unless}}
               <br />
               <small>{{description}}</small>
             </h4>
