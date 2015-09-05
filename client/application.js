@@ -1,4 +1,4 @@
-Session.setDefault("order_by", "Newest");
+Session.setDefault("orderBy", "Newest");
 orderByDependency = new Tracker.Dependency;
 
 Accounts.ui.config({

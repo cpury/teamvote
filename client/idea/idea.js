@@ -19,18 +19,18 @@ Template.listIdeas.onCreated(function () {
 Template.listIdeas.helpers({
   ideas: function () {
     orderByDependency.depend();
-    order_by = Session.get("order_by");
+    orderBy = Session.get("orderBy");
 
-    if (order_by == "Newest") {
+    if (orderBy == "Newest") {
       return Ideas.find({}, {sort: {createdAt: -1}});
     }
-    if (order_by == "Oldest") {
+    if (orderBy == "Oldest") {
       return Ideas.find({}, {sort: {createdAt: +1}});
     }
-    if (order_by == "Upvotes") {
+    if (orderBy == "Upvotes") {
       return Ideas.find({}, {sort: {upvoteCount: -1, createdAt: -1}});
     }
-    if (order_by == "Comments") {
+    if (orderBy == "Comments") {
       return Ideas.find({}, {sort: {commentCount: -1, createdAt: -1}});
     }
 
@@ -53,7 +53,7 @@ Template.ideaHeading.helpers({
 
 Template.orderBy.helpers({
   isSelected: function (value) {
-    return Session.equals('order_by', value) ? 'active' : '';
+    return Session.equals('orderBy', value) ? 'active' : '';
   }
 });
 
@@ -74,17 +74,17 @@ Template.projectHeading.events({
 
 Template.newIdea.events({
   "submit #new-idea": function (event) {
-    var title = event.target.title.value;
-    var description = event.target.description.value;
+    var newIdeaTitle = event.target.title.value;
+    var newIdeaDescription = event.target.description.value;
     var currentProject = Session.get("currentProject");
 
-    if (!title) {
+    if (!newIdeaTitle) {
       $('#newIdeaTitle').focus();
       sAlert.error('Please provide a title');
       return false;
     }
 
-    Meteor.call("addIdea", currentProject, title, description, function (err, data) {
+    Meteor.call("addIdea", currentProject, newIdeaTitle, newIdeaDescription, function (err, data) {
       if (err) {
         sAlert.error('Failed to add idea...');
         console.log("Error while adding idea:", err);
@@ -96,7 +96,7 @@ Template.newIdea.events({
       sAlert.success('Idea added successfully');
 
       analytics.track("Add idea", {
-        title: this.title
+        title: newIdeaTitle
       });
     });
 
@@ -111,17 +111,17 @@ Template.newIdea.events({
 
 Template.editIdeaModal.events({
   "submit #edit-idea": function (event) {
-    var id = Session.get("editIdeaId");
-    var title = event.target.title.value;
-    var description = event.target.description.value;
+    var editIdeaId = Session.get("editIdeaId");
+    var editIdeaTitle = event.target.title.value;
+    var editIdeaDescription = event.target.description.value;
 
-    if (!title) {
+    if (!editIdeaTitle) {
       $('#editIdeaTitle').focus();
       sAlert.error('Please provide a title');
       return false;
     }
 
-    Meteor.call("editIdea", id, title, description, function (err, data) {
+    Meteor.call("editIdea", editIdeaId, editIdeaTitle, editIdeaDescription, function (err, data) {
       if (err) {
         sAlert.error('Failed to edit idea...');
         console.log("Error while editing idea:", err);
@@ -131,7 +131,8 @@ Template.editIdeaModal.events({
       sAlert.success('Idea edited successfully');
 
       analytics.track("Edit idea", {
-        title: event.target.title.value
+        id: editIdeaId,
+        title: editIdeaTitle
       });
     });
 
@@ -153,7 +154,10 @@ Template.idea.events({
     $('#editIdeaDescription').val(this.description);
   },
   "click .delete-idea": function () {
-    Meteor.call("deleteIdea", this._id, function (err, data) {
+    var deleteIdeaId = this._id;
+    var deleteIdeaTitle = this.title;
+
+    Meteor.call("deleteIdea", deleteIdeaId, function (err, data) {
       if (err) {
         sAlert.error('Failed to delete idea...');
         console.log("Error while deleting idea:", err);
@@ -162,13 +166,16 @@ Template.idea.events({
 
       sAlert.success('Idea deleted successfully');
       analytics.track("Delete idea", {
-        _id: this._id,
-        title: this.title
+        _id: deleteIdeaId,
+        title: deleteIdeaTitle
       });
     });
   },
   "click .upvote-idea": function () {
-    Meteor.call("upvoteIdea", this._id, function (err, data) {
+    var upvoteIdeaId = this._id;
+    var upvoteIdeaTitle = this.title;
+
+    Meteor.call("upvoteIdea", upvoteIdeaId, function (err, data) {
       if (err) {
         sAlert.error('Failed to upvote idea...');
         console.log("Error while upvoting idea:", err);
@@ -177,8 +184,8 @@ Template.idea.events({
 
       orderByDependency.changed();
       analytics.track("Toggle upvote idea", {
-        _id: this._id,
-        title: this.title
+        _id: upvoteIdeaId,
+        title: upvoteIdeaTitle
       });
     });
   }
@@ -186,13 +193,13 @@ Template.idea.events({
 
 Template.orderBy.events({
   "change .orderByButton": function (event) {
-    var order_by = event.target.id;
+    var orderBy = event.target.id;
 
-    Session.set("order_by", order_by);
+    Session.set("orderBy", orderBy);
     orderByDependency.changed();
 
     analytics.track("Changed ordering", {
-      newOrdering: order_by
+      newOrdering: orderBy
     });
   }
 });

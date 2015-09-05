@@ -6,7 +6,11 @@ Template.comment.helpers({
 
 Template.comment.events({
   "click .delete-comment": function () {
-    Meteor.call("deleteComment", Template.parentData()._id, this._id, function (err, data) {
+    var deleteCommentIdeaId = Template.parentData()._id;
+    var deleteCommentId = this._id;
+    var deleteCommentText = this.text;
+
+    Meteor.call("deleteComment", deleteCommentIdeaId, deleteCommentId, function (err, data) {
       if (err) {
         sAlert.error('Failed to delete comment...');
         console.log("Error while deleting comment:", err);
@@ -18,13 +22,17 @@ Template.comment.events({
       sAlert.success('Comment deleted successfully');
 
       analytics.track("Delete comment", {
-        _id: this._id,
-        text: this.text
+        _id: deleteCommentId,
+        text: deleteCommentText
       });
     });
   },
   "click .upvote-comment": function () {
-    Meteor.call("upvoteComment", Template.parentData()._id, this._id, function (err, data) {
+    var upvoteCommentIdeaId = Template.parentData()._id;
+    var upvoteCommentId = this._id;
+    var upvoteCommentText = this.text;
+
+    Meteor.call("upvoteComment", upvoteCommentIdeaId, upvoteCommentId, function (err, data) {
       if (err) {
         sAlert.error('Failed to upvote comment...');
         console.log("Error while upvoting comment:", err);
@@ -34,8 +42,8 @@ Template.comment.events({
       orderByDependency.changed();
 
       analytics.track("Toggle upvote comment", {
-        _id: this._id,
-        text: this.text
+        _id: upvoteCommentId,
+        text: upvoteCommentText
       });
     });
   }
@@ -43,15 +51,16 @@ Template.comment.events({
 
 Template.newComment.events({
   "submit .new-comment": function (event) {
-    var text = event.target.text.value;
+    var addCommentIdeaId = this._id;
+    var addCommenttext = event.target.text.value;
 
-    if (!text) {
+    if (!addCommenttext) {
       $('#newCommentText').focus();
       sAlert.error('Please provide a comment body');
       return false;
     }
 
-    Meteor.call("addComment", this._id, text, function (err, data) {
+    Meteor.call("addComment", addCommentIdeaId, addCommenttext, function (err, data) {
       if (err) {
         sAlert.error('Failed to add comment...');
         console.log("Error while adding comment:", err);
@@ -63,8 +72,8 @@ Template.newComment.events({
       sAlert.success('Comment added successfully');
 
       analytics.track("Add comment", {
-        idea: this._id,
-        text: text
+        idea: addCommentIdeaId,
+        text: addCommenttext
       });
     });
 

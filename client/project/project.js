@@ -21,16 +21,16 @@ Template.project.helpers({
 
 Template.newProject.events({
   "submit #new-project": function (event) {
-    var title = event.target.title.value;
-    var description = event.target.description.value;
+    var newProjectTitle = event.target.title.value;
+    var newProjectDescription = event.target.description.value;
 
-    if (!title) {
+    if (!newProjectTitle) {
       $('#newProjectTitle').focus();
       sAlert.error('Please provide a title');
       return false;
     }
 
-    Meteor.call("addProject", title, description, function (err, data) {
+    Meteor.call("addProject", newProjectTitle, newProjectDescription, function (err, data) {
       if (err) {
         sAlert.error('Failed to add project...');
         console.log("Error while adding project:", err);
@@ -43,7 +43,7 @@ Template.newProject.events({
 
       sAlert.success('Project added successfully');
       analytics.track("Add project", {
-        title: this.title
+        "title": newProjectTitle
       });
 
       FlowRouter.go('/' + data + '/');
@@ -60,17 +60,17 @@ Template.newProject.events({
 
 Template.editProjectModal.events({
   "submit #edit-project": function (event) {
-    var id = Session.get("editProjectId");
-    var title = event.target.title.value;
-    var description = event.target.description.value;
+    var editProjectId = Session.get("editProjectId");
+    var editProjectTitle = event.target.title.value;
+    var editProjectDescription = event.target.description.value;
 
-    if (!title) {
+    if (!editProjectTitle) {
       $('#editProjectTitle').focus();
       sAlert.error('Please provide a title');
       return false;
     }
 
-    Meteor.call("editProject", id, title, description, function (err, data) {
+    Meteor.call("editProject", editProjectId, editProjectTitle, editProjectDescription, function (err, data) {
       if (err) {
         sAlert.error('Failed to edit project...');
         console.log("Error while editing project:", err);
@@ -80,7 +80,8 @@ Template.editProjectModal.events({
       sAlert.success('Project edited successfully');
 
       analytics.track("Edit project", {
-        title: event.target.title.value
+        "id": editProjectId,
+        "title": editProjectTitle
       });
     });
 
@@ -102,15 +103,15 @@ Template.project.events({
     $('#editProjectDescription').val(this.description);
   },
   "click .delete-project": function () {
-    var projectId = this._id;
-    var projectTitle = this.title;
+    var deleteProjectId = this._id;
+    var deleteProjectTitle = this.title;
 
-    bootbox.confirm("Are you sure you want to delete \"" + projectTitle + "\"?", function(result) {
+    bootbox.confirm("Are you sure you want to delete \"" + deleteProjectTitle + "\"?", function(result) {
       if (!result) {
         return;
       }
 
-      Meteor.call("deleteProject", projectId, function (err, data) {
+      Meteor.call("deleteProject", deleteProjectId, function (err, data) {
         if (err) {
           sAlert.error('Failed to delete project...');
           console.log("Error while deleting project:", err);
@@ -118,8 +119,8 @@ Template.project.events({
         }
 
         analytics.track("Delete project", {
-          _id: projectId,
-          title: projectTitle
+          _id: deleteProjectId,
+          title: deleteProjectTitle
         });
 
         sAlert.success('Project deleted successfully');
