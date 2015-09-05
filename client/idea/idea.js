@@ -157,17 +157,23 @@ Template.idea.events({
     var deleteIdeaId = this._id;
     var deleteIdeaTitle = this.title;
 
-    Meteor.call("deleteIdea", deleteIdeaId, function (err, data) {
-      if (err) {
-        sAlert.error('Failed to delete idea...');
-        console.log("Error while deleting idea:", err);
+    bootbox.confirm("Are you sure you want to delete \"" + deleteIdeaTitle + "\"?", function(result) {
+      if (!result) {
         return;
       }
 
-      sAlert.success('Idea deleted successfully');
-      analytics.track("Delete idea", {
-        _id: deleteIdeaId,
-        title: deleteIdeaTitle
+      Meteor.call("deleteIdea", deleteIdeaId, function (err, data) {
+        if (err) {
+          sAlert.error('Failed to delete idea...');
+          console.log("Error while deleting idea:", err);
+          return;
+        }
+
+        sAlert.success('Idea deleted successfully');
+        analytics.track("Delete idea", {
+          _id: deleteIdeaId,
+          title: deleteIdeaTitle
+        });
       });
     });
   },
