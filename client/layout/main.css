@@ -423,3 +423,11 @@ h1 small {
 .project-state .btn-default {
   color: LightSlateGray ;
 }
+
+.inactive-project-list-item {
+  background-color: #F9DAD7;
+}
+
+a.inactive-project-list-item:hover {
+  background-color: #F2B6AF;
+}

@@ -9,13 +9,21 @@ Template.listProjects.onCreated(function () {
 
 Template.listProjects.helpers({
   projects: function () {
-    return Projects.find({});
+    projectDependency.depend();
+    return Projects.find({}, {sort: {active: -1}});
   }
 });
 
 Template.project.helpers({
   toUrl: function (projectId) {
     return String(projectId);
+  },
+  projectListItemClass: function () {
+    if (this.active) {
+      return "active-project-list-item";
+    } else {
+      return "inactive-project-list-item";
+    }
   }
 });
 
@@ -39,7 +47,7 @@ Template.newProject.events({
 
       $('#newProjectModal').removeClass('fade');
 
-      orderByDependency.changed();
+      projectDependency.changed();
 
       sAlert.success('Project added successfully');
       analytics.track("Add project", {
@@ -151,6 +159,8 @@ Template.projectButtons.events({
         });
         sAlert.success('Project deactivated successfully');
       }
+
+      projectDependency.changed();
     });
   }
 });
