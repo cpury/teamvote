@@ -18,8 +18,8 @@ Template.listIdeas.onCreated(function () {
 
 Template.listIdeas.helpers({
   ideas: function () {
-    orderByDependency.depend();
-    orderBy = Session.get("orderBy");
+    ideaDependency.depend();
+    orderBy = Session.get("ideaOrder");
 
     if (orderBy == "Newest") {
       return Ideas.find({}, {sort: {createdAt: -1}});
@@ -51,9 +51,9 @@ Template.ideaHeading.helpers({
   }
 });
 
-Template.orderBy.helpers({
+Template.ideaOrder.helpers({
   isSelected: function (value) {
-    return Session.equals('orderBy', value) ? 'active' : '';
+    return Session.equals('ideaOrder', value) ? 'active' : '';
   }
 });
 
@@ -91,7 +91,7 @@ Template.newIdea.events({
         return;
       }
 
-      orderByDependency.changed();
+      ideaDependency.changed();
 
       sAlert.success('Idea added successfully');
 
@@ -191,7 +191,7 @@ Template.idea.events({
         return;
       }
 
-      orderByDependency.changed();
+      ideaDependency.changed();
       analytics.track("Toggle upvote idea", {
         _id: upvoteIdeaId,
         title: upvoteIdeaTitle
@@ -200,16 +200,12 @@ Template.idea.events({
   }
 });
 
-Template.orderBy.events({
+Template.ideaOrder.events({
   "change .orderByButton": function (event) {
     var orderBy = event.target.id;
 
-    Session.set("orderBy", orderBy);
-    orderByDependency.changed();
-
-    analytics.track("Changed ordering", {
-      newOrdering: orderBy
-    });
+    Session.set("ideaOrder", orderBy);
+    ideaDependency.changed();
   }
 });
 

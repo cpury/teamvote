@@ -4,7 +4,7 @@
       {{> newIdea}}
     </div>
     <div class="pull-right">
-      {{> orderBy}}
+      {{> ideaOrder}}
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
   {{> newIdeaModal}}
 </template>
 
-<template name="orderBy">
+<template name="ideaOrder">
   <label class="pull-left" style="padding-top: 6px; padding-right: 8px;">Order by:</label>
   <div class="btn-group" data-toggle="buttons">
     <label class="btn btn-info {{isSelected "Newest"}}" title="Age">

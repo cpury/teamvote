@@ -1,5 +1,6 @@
-Session.setDefault("orderBy", "Newest");
-orderByDependency = new Tracker.Dependency;
+Session.setDefault("ideaOrder", "Newest");
+projectDependency = new Tracker.Dependency;
+ideaDependency = new Tracker.Dependency;
 
 Accounts.ui.config({
   passwordSignupFields: "USERNAME_AND_EMAIL",

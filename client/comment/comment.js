@@ -18,7 +18,7 @@ Template.comment.events({
         return;
       }
 
-      orderByDependency.changed();
+      ideaDependency.changed();
 
       sAlert.success('Comment deleted successfully');
 
@@ -41,7 +41,7 @@ Template.comment.events({
         return;
       }
 
-      orderByDependency.changed();
+      ideaDependency.changed();
 
       analytics.track("Toggle upvote comment", {
         _id: upvoteCommentId,
@@ -70,7 +70,7 @@ Template.newComment.events({
         return;
       }
 
-      orderByDependency.changed();
+      ideaDependency.changed();
 
       sAlert.success('Comment added successfully');
 
