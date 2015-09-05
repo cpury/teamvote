@@ -180,6 +180,10 @@ Template.idea.events({
     });
   },
   "click .upvote-idea": function () {
+    if (!Meteor.userId()) {
+      return;
+    }
+
     var upvoteIdeaProjectId = Session.get("currentProject");
     var upvoteIdeaId = this._id;
     var upvoteIdeaTitle = this.title;
