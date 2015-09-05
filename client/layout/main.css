@@ -23,7 +23,8 @@ body {
 
 .idea-heading {
   font-size: 20px;
-  padding-top: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 2%;
   padding-right: 2%;
   word-wrap: break-word;
