@@ -74,9 +74,9 @@ Template.projectHeading.events({
 
 Template.newIdea.events({
   "submit #new-idea": function (event) {
+    var newIdeaProjectId = Session.get("currentProject");
     var newIdeaTitle = event.target.title.value;
     var newIdeaDescription = event.target.description.value;
-    var currentProject = Session.get("currentProject");
 
     if (!newIdeaTitle) {
       $('#newIdeaTitle').focus();
@@ -84,7 +84,7 @@ Template.newIdea.events({
       return false;
     }
 
-    Meteor.call("addIdea", currentProject, newIdeaTitle, newIdeaDescription, function (err, data) {
+    Meteor.call("addIdea", newIdeaProjectId, newIdeaTitle, newIdeaDescription, function (err, data) {
       if (err) {
         sAlert.error('Failed to add idea...');
         console.log("Error while adding idea:", err);
@@ -111,6 +111,7 @@ Template.newIdea.events({
 
 Template.editIdeaModal.events({
   "submit #edit-idea": function (event) {
+    var editIdeaProjectId = Session.get("currentProject");
     var editIdeaId = Session.get("editIdeaId");
     var editIdeaTitle = event.target.title.value;
     var editIdeaDescription = event.target.description.value;
@@ -121,7 +122,7 @@ Template.editIdeaModal.events({
       return false;
     }
 
-    Meteor.call("editIdea", editIdeaId, editIdeaTitle, editIdeaDescription, function (err, data) {
+    Meteor.call("editIdea", editIdeaProjectId, editIdeaId, editIdeaTitle, editIdeaDescription, function (err, data) {
       if (err) {
         sAlert.error('Failed to edit idea...');
         console.log("Error while editing idea:", err);
@@ -154,6 +155,7 @@ Template.idea.events({
     $('#editIdeaDescription').val(this.description);
   },
   "click .delete-idea": function () {
+    var deleteIdeaProjectId = Session.get("currentProject");
     var deleteIdeaId = this._id;
     var deleteIdeaTitle = this.title;
 
@@ -162,7 +164,7 @@ Template.idea.events({
         return;
       }
 
-      Meteor.call("deleteIdea", deleteIdeaId, function (err, data) {
+      Meteor.call("deleteIdea", deleteIdeaProjectId, deleteIdeaId, function (err, data) {
         if (err) {
           sAlert.error('Failed to delete idea...');
           console.log("Error while deleting idea:", err);
@@ -178,10 +180,11 @@ Template.idea.events({
     });
   },
   "click .upvote-idea": function () {
+    var upvoteIdeaProjectId = Session.get("currentProject");
     var upvoteIdeaId = this._id;
     var upvoteIdeaTitle = this.title;
 
-    Meteor.call("upvoteIdea", upvoteIdeaId, function (err, data) {
+    Meteor.call("upvoteIdea", upvoteIdeaProjectId, upvoteIdeaId, function (err, data) {
       if (err) {
         sAlert.error('Failed to upvote idea...');
         console.log("Error while upvoting idea:", err);
