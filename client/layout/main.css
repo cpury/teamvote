@@ -327,7 +327,7 @@ h1 small {
 }
 
 .comment-toolbar-td {
-  width: 30px;
+  width: 38px;
 }
 
 .comment-timestamp-td {
@@ -372,10 +372,6 @@ h1 small {
     width: 15%;
   }
 
-  .comment-toolbar-td {
-    width: 35px;
-  }
-
   #projectHeading h1 {
     font-size: 2.5em;
   }
@@ -405,4 +401,9 @@ h1 small {
 .idea-button {
   color: grey;
   font-size: 150% !important;
+}
+
+.comment-button {
+  color: grey;
+  font-size: 120% !important;
 }
