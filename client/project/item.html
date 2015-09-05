@@ -24,10 +24,17 @@
 </template>
 
 <template name="projectButtons">
-  <div class="btn-group pull-right btn-group-xs project-toolbar">
-    <button type="button" class="btn btn-link project-button edit-project"><i class="glyphicon glyphicon-pencil"></i></button>
-    <button type="button" class="btn btn-link project-button delete-project"><i class="glyphicon glyphicon-trash"></i></button>
-  </div>
+  <form class="project-toolbar pull-right">
+    <div class="project-state pull-left">
+      Active?&nbsp;
+      <input type="checkbox" data-style="btn-group-sm" data-off-class="btn-primary" data-on-class="btn-success" id="project-state-{{_id}}">
+    </div>
+
+    <div class="btn-group btn-group-xs pull-left">
+      <button type="button" class="btn btn-link project-button edit-project"><i class="glyphicon glyphicon-pencil"></i></button>
+      <button type="button" class="btn btn-link project-button delete-project"><i class="glyphicon glyphicon-trash"></i></button>
+    </div>
+  </form>
 </template>
 
 <template name="projectMetaInfo">

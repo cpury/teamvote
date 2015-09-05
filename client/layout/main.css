@@ -310,7 +310,7 @@ h1 small {
 }
 
 .project-heading-toolbar-td {
-  width: 65px;
+  width: 190px;
 }
 
 .idea-heading-title-td {
@@ -414,4 +414,12 @@ h1 small {
 
 .bootbox-confirm .bootbox-body {
   font-size: 180%;
+}
+
+.project-state {
+  margin-right: 10px;
+}
+
+.project-state .btn-default {
+  color: LightSlateGray ;
 }

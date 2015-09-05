@@ -129,6 +129,32 @@ Template.project.events({
   }
 });
 
+Template.projectButtons.events({
+  "change .project-state :checkbox": function (event) {
+    var changeProjectStateProjectId = this._id;
+    var changeProjectState = event.target.checked;
+    Meteor.call("setActiveProject", changeProjectStateProjectId, changeProjectState, function (err, data) {
+      if (err) {
+        sAlert.error('Failed to set project state...');
+        console.log("Error while setting project state:", err);
+        return;
+      }
+
+      if (changeProjectState) {
+        analytics.track("Activate project", {
+          _id: changeProjectStateProjectId
+        });
+        sAlert.success('Project activated successfully');
+      } else {
+        analytics.track("Deactivate project", {
+          _id: changeProjectStateProjectId
+        });
+        sAlert.success('Project deactivated successfully');
+      }
+    });
+  }
+});
+
 Template.welcome.events({
   "click .toggle-signup": function () {
     if(!Meteor.userId()) {
@@ -178,4 +204,14 @@ Template.projectToolbar.onRendered(function() {
   if (!Meteor.userId()) {
     $('#new-project-button').popover();
   }
+});
+
+Template.projectButtons.onRendered(function () {
+  $('#project-state-' + this.data._id).prop('checked', this.data.active);
+  $('#project-state-' + this.data._id).checkboxpicker({
+    offLabel: false,
+    offIconClass: "glyphicon glyphicon-remove",
+    onLabel: false,
+    onIconClass: "glyphicon glyphicon-ok"
+  });
 });
