@@ -102,14 +102,19 @@ body {
   padding-right: 15px;
 }
 
-.idea-content-well {
-  margin-bottom: 0;
-  padding: 10px;
+.project-description {
+  font-family: inherit;
+  border: 0;
+  background-color: transparent;
+  font-size: 0.8em;
 }
 
 .idea-description {
+  font-family: inherit;
   font-size: 110%;
   word-wrap: break-word;
+  margin-bottom: 0;
+  padding: 10px;
 }
 
 .comment-body {
