@@ -43,10 +43,12 @@ else}}default{{/if}} upvote-idea">
         </h4>
       </a>
 
-      {{#if userOwnsIdea this}}
-        <td class="idea-heading-toolbar-td">
-          {{>ideaButtons}}
-        </td>
+      {{#if currentProject.active}}
+        {{#if userOwnsIdea this}}
+          <td class="idea-heading-toolbar-td">
+            {{>ideaButtons}}
+          </td>
+        {{/if}}
       {{/if}}
     </tr>
   </table>

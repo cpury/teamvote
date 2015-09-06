@@ -25,12 +25,14 @@
         </td>
 
         <td class="comment-toolbar-td">
-          {{#if userOwnsComment this}}
-            <div class="btn-group btn-group-xs pull-right">
-              <button type="button" class="btn btn-link comment-button delete-comment">
-                <i class="glyphicon glyphicon-trash"></i>
-              </button>
-            </div>
+          {{#if currentProject.active}}
+            {{#if userOwnsComment this}}
+              <div class="btn-group btn-group-xs pull-right">
+                <button type="button" class="btn btn-link comment-button delete-comment">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+              </div>
+            {{/if}}
           {{/if}}
         </td>
       </tr>
@@ -40,14 +42,16 @@
 
 <template name="newComment">
   {{#if currentUser}}
-  <li class="list-group-item">
-    <form class="new-comment">
-      <div class="input-group input-group">
-        <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
-        <input type="text" id="newCommentText" class="form-control large-input" placeholder="Add a new comment" name="text" maxlength="100" autocomplete="off">
-      </div>
-      <button type="submit" class="btn btn-default hidden">Submit</button>
-    </form>
-  </li>
+    {{#if currentProject.active}}
+      <li class="list-group-item">
+        <form class="new-comment">
+          <div class="input-group input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+            <input type="text" id="newCommentText" class="form-control large-input" placeholder="Add a new comment" name="text" maxlength="100" autocomplete="off">
+          </div>
+          <button type="submit" class="btn btn-default hidden">Submit</button>
+        </form>
+      </li>
+    {{/if}}
   {{/if}}
 </template>

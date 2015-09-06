@@ -29,6 +29,10 @@ Template.comment.events({
     });
   },
   "click .upvote-comment": function () {
+    if (!Meteor.userId() || !Blaze._globalHelpers['currentProject'].active) {
+      return;
+    }
+
     var upvoteCommentProjectId = Session.get("currentProjectId");
     var upvoteCommentIdeaId = Template.parentData()._id;
     var upvoteCommentId = this._id;
