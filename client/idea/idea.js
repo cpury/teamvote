@@ -227,6 +227,9 @@ Template.newIdea.onRendered(function() {
     $('input[maxlength]').maxlength({
       alwaysShow: true
     });
+    $('textarea[maxlength]').maxlength({
+      alwaysShow: true
+    });
     setTimeout(function(){ $('#newIdeaTitle').focus(); }, 150);
   });
 });
@@ -234,6 +237,9 @@ Template.newIdea.onRendered(function() {
 Template.editIdeaModal.onRendered(function() {
   $('#editIdeaModal').on('shown.bs.modal', function() {
     $('input[maxlength]').maxlength({
+      alwaysShow: true
+    });
+    $('textarea[maxlength]').maxlength({
       alwaysShow: true
     });
     setTimeout(function(){ $('#editIdeaTitle').focus(); }, 150);

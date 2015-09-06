@@ -197,6 +197,9 @@ Template.newProject.onRendered(function() {
     $('input[maxlength]').maxlength({
       alwaysShow: true
     });
+    $('textarea[maxlength]').maxlength({
+      alwaysShow: true
+    });
     setTimeout(function(){ $('#newProjectTitle').focus(); }, 150);
   });
 });
@@ -204,6 +207,9 @@ Template.newProject.onRendered(function() {
 Template.editProjectModal.onRendered(function() {
   $('#editProjectModal').on('shown.bs.modal', function() {
     $('input[maxlength]').maxlength({
+      alwaysShow: true
+    });
+    $('textarea[maxlength]').maxlength({
       alwaysShow: true
     });
     setTimeout(function(){ $('#editProjectTitle').focus(); }, 150);
