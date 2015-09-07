@@ -89,6 +89,11 @@ Template.newIdea.events({
 
     Meteor.call("addIdea", newIdeaProjectId, newIdeaTitle, newIdeaDescription, function (err, data) {
       if (err) {
+        if (err.error === "duplicate-key") {
+          sAlert.error(err.reason);
+          return;
+        }
+
         sAlert.error('Failed to add idea...');
         console.log("Error while adding idea:", err);
         return;

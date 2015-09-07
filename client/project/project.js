@@ -40,6 +40,11 @@ Template.newProject.events({
 
     Meteor.call("addProject", newProjectTitle, newProjectDescription, function (err, data) {
       if (err) {
+        if (err.error === "duplicate-key") {
+          sAlert.error(err.reason);
+          return;
+        }
+
         sAlert.error('Failed to add project...');
         console.log("Error while adding project:", err);
         return;
