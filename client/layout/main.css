@@ -436,3 +436,7 @@ h1 small {
 a.inactive-project-list-item:hover {
   background-color: #F7D3CF;
 }
+
+.btn-toolbar {
+  margin-left: 0;
+}
