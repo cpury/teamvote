@@ -132,6 +132,11 @@ Template.editIdeaModal.events({
 
     Meteor.call("editIdea", editIdeaProjectId, editIdeaId, editIdeaTitle, editIdeaDescription, function (err, data) {
       if (err) {
+        if (err.error === "duplicate-key") {
+          sAlert.error(err.reason);
+          return;
+        }
+
         sAlert.error('Failed to edit idea...');
         console.log("Error while editing idea:", err);
         return;
