@@ -1,4 +1,8 @@
 <template name="listIdeas">
+  {{#unless currentUser}}
+    {{> welcome}}
+  {{/unless}}
+
   {{#if Template.subscriptionsReady}}
     {{> projectHeading}}
     {{> ideaToolbar}}
