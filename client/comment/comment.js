@@ -29,7 +29,7 @@ Template.comment.events({
     });
   },
   "click .upvote-comment": function () {
-    if (!Meteor.userId() || !Blaze._globalHelpers['currentProject'].active) {
+    if (!Meteor.userId()) {
       return;
     }
 

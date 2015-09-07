@@ -193,7 +193,7 @@ Template.idea.events({
     });
   },
   "click .upvote-idea": function () {
-    if (!Meteor.userId() || !Blaze._globalHelpers['currentProject'].active) {
+    if (!Meteor.userId()) {
       return;
     }
 
