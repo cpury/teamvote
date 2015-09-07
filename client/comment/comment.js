@@ -62,7 +62,7 @@ Template.newComment.events({
     var addCommenttext = event.target.text.value;
 
     if (!addCommenttext) {
-      $('#newCommentText').focus();
+      $('.newCommentText').focus();
       sAlert.error('Please provide a comment body');
       return false;
     }
@@ -85,6 +85,7 @@ Template.newComment.events({
     });
 
     event.target.text.value = "";
+    $('.newCommentText').blur();
 
     return false;
   }
