@@ -440,3 +440,24 @@ a.inactive-project-list-item:hover {
 .btn-toolbar {
   margin-left: 0;
 }
+
+.comment-item:hover {
+  background-color: #f5f5f5;
+}
+
+.idea-panel-heading.own {
+  background-color: #DCE9D2;
+}
+
+.idea-panel-heading.own:hover {
+  background-color: #CBDEBB;
+}
+
+.comment-item.own {
+  background-color: #DCE9D2;
+  border-color: lightgray;
+}
+
+.comment-item.own:hover {
+  background-color: #CBDEBB;
+}

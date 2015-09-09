@@ -1,5 +1,5 @@
 <template name="comment">
-  <li class="list-group-item">
+  <li class="list-group-item comment-item {{#if userOwnsComment this}}own{{/if}}">
     <table class="comment-table">
       <tr>
         <td class="comment-button-td">

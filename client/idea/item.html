@@ -1,6 +1,6 @@
 <template name="idea">
   <div id="panel-{{_id}}" class="panel panel-default idea-panel">
-    <div class="panel-heading idea-panel-heading">
+    <div class="panel-heading idea-panel-heading {{#if userOwnsIdea this}}own{{/if}}">
       {{>ideaHeading}}
     </div>
 
