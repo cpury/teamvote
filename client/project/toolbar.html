@@ -8,7 +8,7 @@
 
 <template name="newProject">
   {{#if currentUser}}
-    <button type="button" id="new-project-button" class="btn btn-success pull-left" data-toggle="modal" data-target="#newProjectModal">
+    <button type="button" id="new-project-button" class="btn btn-success pull-left">
       <i class="glyphicon glyphicon-plus-sign"></i> New Project
     </button>
   {{else}}
@@ -16,5 +16,4 @@
       <i class="glyphicon glyphicon-plus-sign"></i> New project
     </a>
   {{/if}}
-  {{> newProjectModal}}
 </template>

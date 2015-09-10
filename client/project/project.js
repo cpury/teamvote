@@ -1,8 +1,8 @@
-var editProjectModalPrivateInfoUpdate = function (private) {
+var projectModalPrivateInfoUpdate = function (object, private) {
   if (private) {
-    $('#editProjectPrivateInfo').text("Only people with the URL can join");
+    object.text("Only people with the URL can join");
   } else {
-    $('#editProjectPrivateInfo').text("Anyone can find and join");
+    object.text("Anyone can find and join");
   }
 };
 
@@ -35,7 +35,16 @@ Template.project.helpers({
   }
 });
 
-Template.newProject.events({
+Template.projectToolbar.events({
+  "click #new-project-button": function () {
+    $('#newProjectModal').modal('show');
+  }
+});
+
+Template.newProjectModal.events({
+  "change #newProjectPrivate": function (event) {
+    projectModalPrivateInfoUpdate($('#newProjectPrivateInfo'), event.target.checked);
+  },
   "submit #new-project": function (event) {
     var newProjectTitle = event.target.title.value;
     var newProjectDescription = event.target.description.value;
@@ -83,7 +92,7 @@ Template.newProject.events({
 
 Template.editProjectModal.events({
   "change #editProjectPrivate": function (event) {
-    editProjectModalPrivateInfoUpdate(event.target.checked);
+    projectModalPrivateInfoUpdate($('#editProjectPrivateInfo'), event.target.checked);
   },
   "submit #edit-project": function (event) {
     var editProjectId = Session.get("editProjectId");
@@ -134,7 +143,7 @@ Template.project.events({
     $('#editProjectTitle').val(this.title);
     $('#editProjectDescription').val(this.description);
     $('#editProjectPrivate').prop('checked', this.private);
-    editProjectModalPrivateInfoUpdate(this.private);
+    projectModalPrivateInfoUpdate($('#editProjectPrivateInfo'), this.private);
   },
   "click .delete-project": function () {
     var deleteProjectId = this._id;
@@ -219,6 +228,16 @@ Template.welcome.events({
 });
 
 Template.newProject.onRendered(function() {
+  $('#newProjectPrivate').checkboxpicker({
+    offLabel: "Public",
+    offIconClass: "glyphicon glyphicon-globe",
+    onLabel: "Private",
+    onIconClass: "glyphicon glyphicon-lock"
+  });
+
+  $('#newProjectPrivate').prop('checked', false);
+  projectModalPrivateInfoUpdate($('#newProjectPrivateInfo'), false);
+
   $('#newProjectModal').on('shown.bs.modal', function() {
     $('input[maxlength]').maxlength({
       alwaysShow: true
