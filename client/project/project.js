@@ -9,16 +9,34 @@ var projectModalPrivateInfoUpdate = function (object, private) {
 Template.listProjects.onCreated(function () {
   var self = this;
   self.autorun(function () {
+    self.subscribe("myProjects", function () {
+      Session.set("myProjectsLoaded", true);
+    });
     self.subscribe("publicProjects", function () {
-      Session.set("projectsLoaded", true);
+      Session.set("publicProjectsLoaded", true);
     });
   });
 });
 
 Template.listProjects.helpers({
-  projects: function () {
+  myProjects: function () {
     projectDependency.depend();
-    return Projects.find({}, {sort: {active: -1, createdAt: +1}});
+    return Projects.find(
+      {authorId: Meteor.userId()},
+      {sort: {active: -1, createdAt: +1}}
+    );
+  },
+  publicProjects: function () {
+    projectDependency.depend();
+    return Projects.find(
+      {
+        $and: [
+          {"private": false},
+          {"authorId": {$ne: Meteor.userId()}}
+        ]
+      },
+      {sort: {active: -1, createdAt: +1}}
+    );
   }
 });
 

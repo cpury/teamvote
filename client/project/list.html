@@ -6,16 +6,30 @@
   {{#if Template.subscriptionsReady}}
     {{> projectToolbar}}
 
-    {{#if projects.count}}
+    {{#if currentUser}}
+      <h3>My projects</h3>
+      {{#if myProjects.count}}
       <div class="project-list list-group">
-        {{#with projects}}
-          {{#each projects}}
+        {{#with myProjects}}
+          {{#each myProjects}}
             {{> project}}
           {{/each}}
         {{/with}}
       </div>
-    {{else}}
-      {{> noProjects}}
+      {{else}}
+        {{> noProjects}}
+      {{/if}}
+    {{/if}}
+
+    {{#if publicProjects.count}}
+      <h3>Public projects</h3>
+      <div class="project-list list-group">
+        {{#with publicProjects}}
+          {{#each publicProjects}}
+            {{> project}}
+          {{/each}}
+        {{/with}}
+      </div>
     {{/if}}
 
     {{#if currentUser}}
@@ -49,11 +63,7 @@
     <br />
     <br />
     <h1>No projects yet!</h1>
-    {{#if currentUser}}
-      <h4>Start a new project to start brainstorming!</h4>
-    {{else}}
-      <h4>Log in to start a new project!</h4>
-    {{/if}}
+    <h4>Start a new project to get brainstorming!</h4>
     <br />
     <br />
   </div>

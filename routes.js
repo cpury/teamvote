@@ -1,7 +1,8 @@
 var prepareRoute = function() {
   $('.modal-backdrop').remove();
   Session.set("ideasLoaded", false);
-  Session.set("projectsLoaded", false);
+  Session.set("myProjectsLoaded", false);
+  Session.set("publicProjectsLoaded", false);
 };
 
 FlowRouter.route('/', {
