@@ -14,14 +14,14 @@ Meteor.startup(function () {
 Meteor.publish("publicProjects", function () {
   return Projects.find({
     $and: [
-      {"private": false}
-      // {"authorId": {$ne: Meteor.userId()}}
+      {"private": false},
+      {"authorId": {$ne: this.userId}}
     ]
   });
 });
 
 Meteor.publish("myProjects", function () {
-  return Projects.find({"authorId": Meteor.userId()});
+  return Projects.find({"authorId": this.userId});
 });
 
 Meteor.publish("currentProject", function (projectId) {
