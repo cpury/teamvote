@@ -89,6 +89,7 @@ Template.editProjectModal.events({
     var editProjectId = Session.get("editProjectId");
     var editProjectTitle = event.target.title.value;
     var editProjectDescription = event.target.description.value;
+    var editProjectPrivate = event.target.private.checked;
 
     if (!editProjectTitle) {
       $('#editProjectTitle').focus();
@@ -96,7 +97,7 @@ Template.editProjectModal.events({
       return false;
     }
 
-    Meteor.call("editProject", editProjectId, editProjectTitle, editProjectDescription, function (err, data) {
+    Meteor.call("editProject", editProjectId, editProjectTitle, editProjectDescription, editProjectPrivate, function (err, data) {
       if (err) {
         if (err.error === "duplicate-key") {
           sAlert.error(err.reason);
