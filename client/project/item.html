@@ -44,5 +44,11 @@
   <div class="project-meta-info">
     <i class="glyphicon glyphicon-info-sign"></i>
     Added by <b>{{ authorName }}</b> {{livestamp createdAt}}.
+    <br>
+    {{#if private}}
+      <i class="glyphicon glyphicon-lock"></i> Private.
+    {{else}}
+      <i class="glyphicon glyphicon-globe"></i> Public.
+    {{/if}}
   </div>
 </template>
