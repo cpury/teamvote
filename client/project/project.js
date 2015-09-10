@@ -18,7 +18,7 @@ Template.listProjects.onCreated(function () {
 Template.listProjects.helpers({
   projects: function () {
     projectDependency.depend();
-    return Projects.find({}, {sort: {active: -1}});
+    return Projects.find({}, {sort: {active: -1, createdAt: +1}});
   }
 });
 
