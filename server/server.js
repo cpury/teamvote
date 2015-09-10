@@ -6,15 +6,36 @@ Meteor.startup(function () {
   Ideas._ensureIndex({"title": 1, "projectId": 1}, {unique: true});
 
   Projects._ensureIndex({"authorId": 1});
+  Projects._ensureIndex({"active": 1});
+  Projects._ensureIndex({"private": 1});
   Projects._ensureIndex({"title": 1}, {unique: true});
 });
 
-Meteor.publish("projects", function () {
-  return Projects.find({});
+Meteor.publish("publicProjects", function () {
+  return Projects.find({
+    $and: [
+      {"private": false}
+      // {"authorId": {$ne: Meteor.userId()}}
+    ]
+  });
+});
+
+Meteor.publish("myProjects", function () {
+  return Projects.find({"authorId": Meteor.userId()});
 });
 
 Meteor.publish("currentProject", function (projectId) {
-  return Projects.find(projectId);
+  return Projects.find({
+    $and: [
+      {
+        $or: [
+          { "private": false },
+          { "authorId": this.userId }
+        ]
+      },
+      { "_id": projectId }
+    ]
+  });
 });
 
 Meteor.publish("ideas", function (projectId) {

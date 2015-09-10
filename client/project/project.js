@@ -1,7 +1,7 @@
 Template.listProjects.onCreated(function () {
   var self = this;
   self.autorun(function () {
-    self.subscribe("projects", function () {
+    self.subscribe("publicProjects", function () {
       Session.set("projectsLoaded", true);
     });
   });
@@ -31,6 +31,7 @@ Template.newProject.events({
   "submit #new-project": function (event) {
     var newProjectTitle = event.target.title.value;
     var newProjectDescription = event.target.description.value;
+    var newProjectPrivate = false;
 
     if (!newProjectTitle) {
       $('#newProjectTitle').focus();
@@ -38,7 +39,7 @@ Template.newProject.events({
       return false;
     }
 
-    Meteor.call("addProject", newProjectTitle, newProjectDescription, function (err, data) {
+    Meteor.call("addProject", newProjectTitle, newProjectDescription, newProjectPrivate, function (err, data) {
       if (err) {
         if (err.error === "duplicate-key") {
           sAlert.error(err.reason);
@@ -56,7 +57,8 @@ Template.newProject.events({
 
       sAlert.success('Project added successfully');
       analytics.track("Add project", {
-        "title": newProjectTitle
+        "title": newProjectTitle,
+        "private": newProjectPrivate
       });
 
       FlowRouter.go('/' + data + '/');
