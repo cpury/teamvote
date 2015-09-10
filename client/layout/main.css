@@ -461,3 +461,7 @@ a.inactive-project-list-item:hover {
 .comment-item.own:hover {
   background-color: #CBDEBB;
 }
+
+.project-private-selector {
+  margin-top: 15px;
+}

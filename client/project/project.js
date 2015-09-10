@@ -1,3 +1,11 @@
+var editProjectModalPrivateInfoUpdate = function (private) {
+  if (private) {
+    $('#editProjectPrivateInfo').text("Only people with the URL can join");
+  } else {
+    $('#editProjectPrivateInfo').text("Anyone can find and join");
+  }
+};
+
 Template.listProjects.onCreated(function () {
   var self = this;
   self.autorun(function () {
@@ -74,6 +82,9 @@ Template.newProject.events({
 });
 
 Template.editProjectModal.events({
+  "change #editProjectPrivate": function (event) {
+    editProjectModalPrivateInfoUpdate(event.target.checked);
+  },
   "submit #edit-project": function (event) {
     var editProjectId = Session.get("editProjectId");
     var editProjectTitle = event.target.title.value;
@@ -121,6 +132,8 @@ Template.project.events({
     $('#editProjectModal').modal('show');
     $('#editProjectTitle').val(this.title);
     $('#editProjectDescription').val(this.description);
+    $('#editProjectPrivate').prop('checked', this.private);
+    editProjectModalPrivateInfoUpdate(this.private);
   },
   "click .delete-project": function () {
     var deleteProjectId = this._id;
@@ -225,6 +238,13 @@ Template.editProjectModal.onRendered(function() {
       alwaysShow: true
     });
     setTimeout(function(){ $('#editProjectTitle').focus(); }, 150);
+
+    $('#editProjectPrivate').checkboxpicker({
+      offLabel: "Public",
+      offIconClass: "glyphicon glyphicon-globe",
+      onLabel: "Private",
+      onIconClass: "glyphicon glyphicon-lock"
+    });
   });
 });
 
