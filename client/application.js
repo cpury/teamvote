@@ -3,8 +3,8 @@ projectDependency = new Tracker.Dependency;
 ideaDependency = new Tracker.Dependency;
 
 Accounts.ui.config({
-  passwordSignupFields: "USERNAME_AND_EMAIL",
-  forceEmailLowercase: true
+  passwordSignupFields: "USERNAME_ONLY",
+  forceEmailLowercase: true,
 });
 
 Session.set("ideasLoaded", false);
